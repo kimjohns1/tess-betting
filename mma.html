@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tess Betting - Sports Betting Platform</title>
+    <title>MMA Betting - Tess Betting Platform</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -67,7 +67,7 @@
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/placeholder.svg?height=600&width=1200') center/cover no-repeat;
             color: white;
             padding: 100px 0;
         }
@@ -90,9 +90,12 @@
             font-weight: bold;
         }
         
-        .match-card {
-            border-left: 4px solid var(--primary);
+        .fight-card {
+            border-left: 4px solid var(--danger);
             margin-bottom: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         .odds {
@@ -102,6 +105,15 @@
         
         .live-indicator {
             background-color: var(--danger);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .upcoming-indicator {
+            background-color: var(--secondary);
             color: white;
             padding: 3px 8px;
             border-radius: 12px;
@@ -134,11 +146,32 @@
         }
         
         .promotion-banner {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--danger), var(--accent));
             color: white;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
+        }
+        
+        .fighter-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .weight-class {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .record {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .championship-belt {
+            color: var(--accent);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -147,7 +180,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-dice me-2"></i>
+                <i class="fas fa-fist-raised me-2"></i>
                 Tess Betting
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -156,13 +189,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="sports.html">Sports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="mma.html">MMA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="casino.html">Casino</a>
@@ -172,8 +208,12 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2"><a href="login.html"target="_blank" style="text-decoration: none; color: inherite">log in</a></button>
-                    <button class="btn btn-accent"><a href="signup.html" target="_blank" style="text-decoration: none; color: inherite">signup</a></button>
+                    <button class="btn btn-outline-light me-2">
+                        <a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a>
+                    </button>
+                    <button class="btn btn-accent">
+                        <a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -182,10 +222,14 @@
     <!-- Hero Section -->
     <section class="hero text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Welcome to Tess Betting</h1>
-            <p class="lead mb-5">The ultimate sports betting experience with the best odds and exclusive bonuses</p>
-            <button class="btn btn-accent btn-lg px-5 me-3"><a href="signupnow.html" target="_blank" style="text-decoration: none; color: inherite">sign up now</a></button>
-            <button class="btn btn-outline-light btn-lg px-5"><a href="learnmore.html" target="_blank" style="text-decoration: none; color: inherite">learn more</a></button>
+            <h1 class="display-4 fw-bold mb-4">MMA Betting at Tess</h1>
+            <p class="lead mb-5">Bet on the world's top MMA fighters with competitive odds and exclusive markets</p>
+            <button class="btn btn-accent btn-lg px-5 me-3">
+                <a href="signupnow.html" target="_blank" style="text-decoration: none; color: inherit">Start Betting</a>
+            </button>
+            <button class="btn btn-outline-light btn-lg px-5">
+                <a href="mma-guide.html" target="_blank" style="text-decoration: none; color: inherit">MMA Guide</a>
+            </button>
         </div>
     </section>
 
@@ -194,11 +238,13 @@
         <div class="promotion-banner">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h3>Welcome Bonus: 100% match up to $500</h3>
-                    <p class="mb-0">New customers only. Min deposit $20. Wagering requirements apply.</p>
+                    <h3>MMA Special: Enhanced Odds on Championship Fights</h3>
+                    <p class="mb-0">Get boosted odds on all title fights this month. Terms and conditions apply.</p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <button class="btn btn-accent"><a href="claimnow.html" target="_blank" style="text-decoration: none; color: inherite">claim now</a></button>
+                    <button class="btn btn-light">
+                        <a href="mma-promos.html" target="_blank" style="text-decoration: none; color: inherit">View Offers</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -207,230 +253,267 @@
     <!-- Main Content -->
     <div class="container my-5">
         <div class="row">
-            <!-- Sports Navigation -->
+            <!-- MMA Navigation -->
             <div class="col-lg-3 mb-4">
                 <div class="list-group">
                     <div class="list-group-item bg-primary text-white">
-                        <i class="fas fa-trophy me-2"></i> Sports
+                        <i class="fas fa-fist-raised me-2"></i> MMA Categories
                     </div>
-                    <a href="football.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Football <span class="badge bg-primary rounded-pill">42</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        UFC <span class="badge bg-primary rounded-pill">8</span>
                     </a>
-                    <a href="basketball.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Basketball <span class="badge bg-primary rounded-pill">28</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Bellator <span class="badge bg-primary rounded-pill">3</span>
                     </a>
-                    <a href="tennis.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Tennis <span class="badge bg-primary rounded-pill">16</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        ONE Championship <span class="badge bg-primary rounded-pill">2</span>
                     </a>
-                    <a href="baseball.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Baseball <span class="badge bg-primary rounded-pill">22</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        PFL <span class="badge bg-primary rounded-pill">4</span>
                     </a>
-                    <a href="hockey.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Hockey <span class="badge bg-primary rounded-pill">15</span>
-                    </a>
-                    <a href="soccer.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Soccer <span class="badge bg-primary rounded-pill">38</span>
-                    </a>
-                    <a href="golf.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Golf <span class="badge bg-primary rounded-pill">7</span>
-                    </a>
-                    <a href="mma.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        MMA <span class="badge bg-primary rounded-pill">12</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Boxing <span class="badge bg-primary rounded-pill">6</span>
                     </a>
                 </div>
 
                 <div class="stats-card mt-4 p-3">
-                    <h5 class="border-bottom pb-2">Top Statistics</h5>
+                    <h5 class="border-bottom pb-2">MMA Stats</h5>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Most Popular:</span>
-                        <span class="fw-bold">Football</span>
+                        <span>Next Event:</span>
+                        <span class="fw-bold">UFC 300</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Active Users:</span>
-                        <span class="fw-bold">5,428</span>
+                        <span>Active Bets:</span>
+                        <span class="fw-bold">1,247</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Live Matches:</span>
-                        <span class="fw-bold text-danger">24</span>
+                        <span>Live Fights:</span>
+                        <span class="fw-bold text-danger">2</span>
                     </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Top Division:</span>
+                        <span class="fw-bold">Heavyweight</span>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Weight Classes
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Heavyweight</span>
+                            <small class="text-muted">265 lbs</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Light Heavyweight</span>
+                            <small class="text-muted">205 lbs</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Middleweight</span>
+                            <small class="text-muted">185 lbs</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Welterweight</span>
+                            <small class="text-muted">170 lbs</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Lightweight</span>
+                            <small class="text-muted">155 lbs</small>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Matches -->
+            <!-- Fights -->
             <div class="col-lg-6 mb-4">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Today's Top Matches</span>
+                        <span>Upcoming MMA Fights</span>
                         <div class="btn-group btn-group-sm">
                             <button class="btn btn-light active">All</button>
                             <button class="btn btn-light">Live</button>
-                            <button class="btn btn-light">Upcoming</button>
+                            <button class="btn btn-light">This Week</button>
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <!-- Live Match -->
-                        <div class="match-card p-3 border-bottom">
+                        <!-- Championship Fight -->
+                        <div class="fight-card p-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div>
-                                    <span class="live-indicator me-2">LIVE</span>
-                                    <span class="text-muted">Football</span>
+                                    <span class="upcoming-indicator me-2">MAIN EVENT</span>
+                                    <span class="text-muted">UFC 300 - Heavyweight Championship</span>
                                 </div>
-                                <small>65:23</small>
+                                <small>Sat, 8:00 PM</small>
+                            </div>
+                            <div class="text-center mb-2">
+                                <small class="championship-belt">
+                                    <i class="fas fa-crown me-1"></i>Heavyweight Title Fight
+                                </small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>Arsenal</strong>
+                                    <div class="fighter-name">Jon Jones</div>
+                                    <div class="weight-class">Heavyweight</div>
+                                    <div class="record">27-1-0</div>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <div class="fw-bold">2 - 1</div>
+                                    <div class="fw-bold text-danger">VS</div>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <strong>Liverpool</strong>
+                                    <div class="fighter-name">Stipe Miocic</div>
+                                    <div class="weight-class">Heavyweight</div>
+                                    <div class="record">20-4-0</div>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds">2.10</span>
+                                        Jones <span class="odds">1.65</span>
                                     </button>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Draw <span class="odds">3.40</span>
-                                    </button>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds">3.75</span>
+                                        Miocic <span class="odds">2.25</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Regular Match -->
-                        <div class="match-card p-3 border-bottom">
+                        <!-- Co-Main Event -->
+                        <div class="fight-card p-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Basketball - NBA</span>
-                                <small>Today, 20:00</small>
+                                <div>
+                                    <span class="upcoming-indicator me-2">CO-MAIN</span>
+                                    <span class="text-muted">UFC 300 - Women's Bantamweight</span>
+                                </div>
+                                <small>Sat, 7:30 PM</small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>LA Lakers</strong>
+                                    <div class="fighter-name">Amanda Nunes</div>
+                                    <div class="weight-class">Bantamweight</div>
+                                    <div class="record">22-5-0</div>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <div class="text-muted">vs</div>
+                                    <div class="fw-bold text-danger">VS</div>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <strong>Boston Celtics</strong>
+                                    <div class="fighter-name">Raquel Pennington</div>
+                                    <div class="weight-class">Bantamweight</div>
+                                    <div class="record">16-8-0</div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds">1.85</span>
+                                        Nunes <span class="odds">1.45</span>
                                     </button>
                                 </div>
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds">1.95</span>
+                                        Pennington <span class="odds">2.75</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Regular Match -->
-                        <div class="match-card p-3 border-bottom">
+                        <!-- Regular Fight -->
+                        <div class="fight-card p-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Tennis - ATP</span>
-                                <small>Today, 16:30</small>
+                                <span class="text-muted">UFC 300 - Lightweight</span>
+                                <small>Sat, 7:00 PM</small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>Rafael Nadal</strong>
+                                    <div class="fighter-name">Charles Oliveira</div>
+                                    <div class="weight-class">Lightweight</div>
+                                    <div class="record">34-9-0</div>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <div class="text-muted">vs</div>
+                                    <div class="fw-bold text-danger">VS</div>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <strong>Novak Djokovic</strong>
+                                    <div class="fighter-name">Arman Tsarukyan</div>
+                                    <div class="weight-class">Lightweight</div>
+                                    <div class="record">21-3-0</div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Nadal <span class="odds">2.25</span>
+                                        Oliveira <span class="odds">1.85</span>
                                     </button>
                                 </div>
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Djokovic <span class="odds">1.65</span>
+                                        Tsarukyan <span class="odds">1.95</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Regular Match -->
-                        <div class="match-card p-3">
+                        <!-- Bellator Fight -->
+                        <div class="fight-card p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Soccer - Premier League</span>
-                                <small>Tomorrow, 15:00</small>
+                                <span class="text-muted">Bellator 301 - Welterweight</span>
+                                <small>Next Friday, 9:00 PM</small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>Manchester City</strong>
+                                    <div class="fighter-name">Yaroslav Amosov</div>
+                                    <div class="weight-class">Welterweight</div>
+                                    <div class="record">27-0-0</div>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <div class="text-muted">vs</div>
+                                    <div class="fw-bold text-danger">VS</div>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <strong>Chelsea</strong>
+                                    <div class="fighter-name">Jason Jackson</div>
+                                    <div class="weight-class">Welterweight</div>
+                                    <div class="record">16-4-0</div>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds">1.75</span>
+                                        Amosov <span class="odds">1.55</span>
                                     </button>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Draw <span class="odds">3.60</span>
-                                    </button>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds">4.50</span>
+                                        Jackson <span class="odds">2.45</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="#" class="text-decoration-none">View All Matches</a>
+                        <a href="#" class="text-decoration-none">View All MMA Fights</a>
                     </div>
                 </div>
 
                 <!-- Featured Events -->
                 <div class="card">
-                    <div class="card-header">Featured Events</div>
+                    <div class="card-header">Featured MMA Events</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100 feature-card">
-                                    <img src="/api/placeholder/400/200" class="card-img-top" alt="UEFA Champions League">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="UFC 300">
                                     <div class="card-body">
-                                        <h5 class="card-title">UEFA Champions League</h5>
-                                        <p class="card-text">Finals: May 24, 2025</p>
-                                        <button class="btn btn-sm btn-primary">View Markets</button>
+                                        <h5 class="card-title">UFC 300</h5>
+                                        <p class="card-text">Historic milestone event featuring championship fights</p>
+                                        <button class="btn btn-sm btn-primary">View All Fights</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100 feature-card">
-                                    <img src="/api/placeholder/400/200" class="card-img-top" alt="NBA Playoffs">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Bellator Championship">
                                     <div class="card-body">
-                                        <h5 class="card-title">NBA Playoffs</h5>
-                                        <p class="card-text">Starting June 1, 2025</p>
+                                        <h5 class="card-title">Bellator Championship Series</h5>
+                                        <p class="card-text">Title fights across multiple weight classes</p>
                                         <button class="btn btn-sm btn-primary">View Markets</button>
                                     </div>
                                 </div>
@@ -445,13 +528,45 @@
                 <div class="bet-slip p-3">
                     <h5 class="border-bottom pb-2 mb-3">Bet Slip</h5>
                     <div class="empty-slip text-center p-4">
-                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                        <i class="fas fa-fist-raised fa-3x text-muted mb-3"></i>
                         <p class="text-muted">Your bet slip is empty</p>
-                        <p class="small text-muted">Click on odds to add selections</p>
+                        <p class="small text-muted">Click on fighter odds to add selections</p>
                     </div>
                     <div class="mt-3 d-grid">
                         <button class="btn btn-secondary" disabled>Place Bet</button>
                     </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        MMA Betting Markets
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Method of Victory
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Round Betting
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Over/Under Rounds
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Performance Bonuses
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="card mt-4">
@@ -461,19 +576,19 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                My Bets
+                                My MMA Bets
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                Deposit Funds
+                                Fighter Stats
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                Responsible Gaming
+                                MMA News
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
@@ -492,14 +607,14 @@
     <!-- Features Section -->
     <section class="bg-light py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Why Choose Tess Betting</h2>
+            <h2 class="text-center mb-5">Why Bet MMA with Tess</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
-                            <h4>Competitive Odds</h4>
-                            <p class="text-muted">We offer some of the best odds in the industry, ensuring maximum value for your bets.</p>
+                            <i class="fas fa-fist-raised fa-3x text-primary mb-3"></i>
+                            <h4>Expert MMA Odds</h4>
+                            <p class="text-muted">Our MMA experts provide the most competitive odds on all major promotions including UFC, Bellator, and ONE Championship.</p>
                         </div>
                     </div>
                 </div>
@@ -507,9 +622,9 @@
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                            <h4>Secure & Safe</h4>
-                            <p class="text-muted">Our platform uses the latest security measures to protect your data and transactions.</p>
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h4>Live Fight Betting</h4>
+                            <p class="text-muted">Bet live during fights with real-time odds updates and multiple in-fight betting markets.</p>
                         </div>
                     </div>
                 </div>
@@ -517,9 +632,9 @@
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-headset fa-3x text-primary mb-3"></i>
-                            <h4>24/7 Support</h4>
-                            <p class="text-muted">Our dedicated support team is always ready to assist you with any questions or issues.</p>
+                            <i class="fas fa-trophy fa-3x text-primary mb-3"></i>
+                            <h4>Championship Coverage</h4>
+                            <p class="text-muted">Complete coverage of all major MMA events, from title fights to preliminary cards.</p>
                         </div>
                     </div>
                 </div>
@@ -533,7 +648,7 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h4 class="mb-4">Tess Betting</h4>
-                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <p>The ultimate destination for MMA betting enthusiasts. Offering competitive odds, comprehensive fight coverage, and exceptional user experience.</p>
                     <div class="d-flex gap-3 mt-4">
                         <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
@@ -543,13 +658,13 @@
                 </div>
                 
                 <div class="col-lg-2 col-md-6">
-                    <h5 class="mb-4">Quick Links</h5>
+                    <h5 class="mb-4">MMA</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">UFC</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Bellator</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">ONE Championship</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">PFL</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Boxing</a></li>
                     </ul>
                 </div>
                 
@@ -558,7 +673,7 @@
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">MMA Rules</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
                     </ul>
@@ -566,16 +681,16 @@
                 
                 <div class="col-lg-4">
                     <h5 class="mb-4">Newsletter</h5>
-                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <p>Subscribe for MMA betting tips, fight previews, and exclusive offers.</p>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Your email address">
                         <button class="btn btn-accent" type="button">Subscribe</button>
                     </div>
                     <div class="mt-4">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method">
                     </div>
                 </div>
             </div>
