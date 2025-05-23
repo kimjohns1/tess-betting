@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - Tess Betting Platform</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=600&width=1200') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .match-card {
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .odds {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .upcoming-indicator {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .today-indicator {
+            background-color: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .featured-indicator {
+            background-color: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .promotion-banner {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-header {
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 15px;
+            font-weight: 600;
+        }
+        
+        .calendar-body {
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--light);
+        }
+        
+        .calendar-day.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .calendar-day.has-events {
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .calendar-day.has-events::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+        
+        .event-time {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .countdown {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .tournament-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 5px;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .filter-bar {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .date-nav {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .date-item {
+            flex: 0 0 auto;
+            text-align: center;
+            padding: 8px 16px;
+            margin-right: 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .date-item:hover {
+            background-color: var(--light);
+        }
+        
+        .date-item.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .date-item .day {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .date-item .date {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .sport-icon {
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .event-count {
+            background-color: var(--secondary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="upcoming.html">Upcoming</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">
+                        <a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a>
+                    </button>
+                    <button class="btn btn-accent">
+                        <a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Upcoming Events</h1>
+            <p class="lead mb-5">Plan ahead and place your bets on all upcoming sporting events</p>
+            <button class="btn btn-secondary btn-lg px-5 me-3">
+                <i class="fas fa-calendar-alt me-2"></i>
+                <a href="#events-calendar" style="text-decoration: none; color: inherit">View Calendar</a>
+            </button>
+            <button class="btn btn-outline-light btn-lg px-5">
+                <a href="featured-events.html" target="_blank" style="text-decoration: none; color: inherit">Featured Events</a>
+            </button>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="container mt-5">
+        <div class="promotion-banner">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3><i class="fas fa-calendar-check me-2"></i> Early Bird Special: 10% Odds Boost</h3>
+                    <p class="mb-0">Place your bets 7+ days before an event and receive a 10% odds boost. T&Cs apply.</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-accent">
+                        <a href="early-bird.html" target="_blank" style="text-decoration: none; color: inherit">Learn More</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5" id="events-calendar">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3 mb-4">
+                <!-- Calendar Widget -->
+                <div class="mb-4">
+                    <div class="calendar-header">
+                        <i class="fas fa-calendar-alt me-2"></i> May 2025
+                    </div>
+                    <div class="calendar-body">
+                        <div class="row text-center mb-2">
+                            <div class="col">S</div>
+                            <div class="col">M</div>
+                            <div class="col">T</div>
+                            <div class="col">W</div>
+                            <div class="col">T</div>
+                            <div class="col">F</div>
+                            <div class="col">S</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col calendar-day text-muted">28</div>
+                            <div class="col calendar-day text-muted">29</div>
+                            <div class="col calendar-day text-muted">30</div>
+                            <div class="col calendar-day">1</div>
+                            <div class="col calendar-day">2</div>
+                            <div class="col calendar-day">3</div>
+                            <div class="col calendar-day">4</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col calendar-day">5</div>
+                            <div class="col calendar-day">6</div>
+                            <div class="col calendar-day">7</div>
+                            <div class="col calendar-day">8</div>
+                            <div class="col calendar-day">9</div>
+                            <div class="col calendar-day">10</div>
+                            <div class="col calendar-day">11</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col calendar-day">12</div>
+                            <div class="col calendar-day">13</div>
+                            <div class="col calendar-day">14</div>
+                            <div class="col calendar-day">15</div>
+                            <div class="col calendar-day">16</div>
+                            <div class="col calendar-day">17</div>
+                            <div class="col calendar-day">18</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col calendar-day">19</div>
+                            <div class="col calendar-day">20</div>
+                            <div class="col calendar-day">21</div>
+                            <div class="col calendar-day">22</div>
+                            <div class="col calendar-day active has-events">23</div>
+                            <div class="col calendar-day has-events">24</div>
+                            <div class="col calendar-day">25</div>
+                        </div>
+                        <div class="row">
+                            <div class="col calendar-day">26</div>
+                            <div class="col calendar-day has-events">27</div>
+                            <div class="col calendar-day">28</div>
+                            <div class="col calendar-day">29</div>
+                            <div class="col calendar-day">30</div>
+                            <div class="col calendar-day">31</div>
+                            <div class="col calendar-day text-muted">1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sports Filter -->
+                <div class="list-group mb-4">
+                    <div class="list-group-item bg-primary text-white">
+                        <i class="fas fa-filter me-2"></i> Filter by Sport
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-futbol sport-icon"></i>
+                            Soccer
+                        </div>
+                        <span class="event-count">38</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-football-ball sport-icon"></i>
+                            Football
+                        </div>
+                        <span class="event-count">42</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-basketball-ball sport-icon"></i>
+                            Basketball
+                        </div>
+                        <span class="event-count">28</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-table-tennis sport-icon"></i>
+                            Tennis
+                        </div>
+                        <span class="event-count">16</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-hockey-puck sport-icon"></i>
+                            Hockey
+                        </div>
+                        <span class="event-count">15</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-baseball-ball sport-icon"></i>
+                            Baseball
+                        </div>
+                        <span class="event-count">22</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-golf-ball sport-icon"></i>
+                            Golf
+                        </div>
+                        <span class="event-count">7</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-fist-raised sport-icon"></i>
+                            MMA
+                        </div>
+                        <span class="event-count">12</span>
+                    </a>
+                </div>
+
+                <!-- Featured Tournaments -->
+                <div class="stats-card p-3">
+                    <h5 class="border-bottom pb-2">Featured Tournaments</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>UEFA Champions League</span>
+                        <span class="badge bg-secondary">May 24</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>NBA Playoffs</span>
+                        <span class="badge bg-secondary">Jun 1</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>French Open</span>
+                        <span class="badge bg-secondary">May 26</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>NFL Draft</span>
+                        <span class="badge bg-secondary">Jun 15</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>UFC 300</span>
+                        <span class="badge bg-secondary">May 27</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-lg-6 mb-4">
+                <!-- Date Navigation -->
+                <div class="date-nav mb-4">
+                    <div class="date-item">
+                        <div class="day">Today</div>
+                        <div class="date">May 23</div>
+                    </div>
+                    <div class="date-item active">
+                        <div class="day">Tomorrow</div>
+                        <div class="date">May 24</div>
+                    </div>
+                    <div class="date-item">
+                        <div class="day">Sun</div>
+                        <div class="date">May 25</div>
+                    </div>
+                    <div class="date-item">
+                        <div class="day">Mon</div>
+                        <div class="date">May 26</div>
+                    </div>
+                    <div class="date-item">
+                        <div class="day">Tue</div>
+                        <div class="date">May 27</div>
+                    </div>
+                    <div class="date-item">
+                        <div class="day">Wed</div>
+                        <div class="date">May 28</div>
+                    </div>
+                    <div class="date-item">
+                        <div class="day">Thu</div>
+                        <div class="date">May 29</div>
+                    </div>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center mb-4">
+                    <div class="btn-group btn-group-sm me-auto">
+                        <button class="btn btn-secondary active">All Events</button>
+                        <button class="btn btn-outline-secondary">Featured</button>
+                        <button class="btn btn-outline-secondary">Championships</button>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mt-2 mt-md-0">
+                        <span class="me-2">Sort:</span>
+                        <select class="form-select form-select-sm" style="width: auto;">
+                            <option selected>Time</option>
+                            <option>Popularity</option>
+                            <option>League</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Featured Event -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-star me-2"></i> Featured Event</span>
+                        <span class="countdown">Starts in 1 day, 4 hours</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="match-card p-3 border-0 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span class="featured-indicator me-2">FEATURED</span>
+                                    <span class="tournament-badge">UEFA Champions League</span>
+                                    <span class="text-muted">Final</span>
+                                </div>
+                                <div class="event-time">May 24, 20:00</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Real Madrid</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Manchester City</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Madrid <span class="odds">2.20</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Draw <span class="odds">3.25</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        City <span class="odds">2.10</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <a href="#" class="btn btn-sm btn-secondary">
+                                    <i class="fas fa-plus-circle me-1"></i> 120+ Markets
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Tomorrow's Events (May 24)</span>
+                        <span class="badge bg-secondary">18 Events</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <!-- Soccer Match -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span class="upcoming-indicator me-2">UPCOMING</span>
+                                    <span class="tournament-badge">Premier League</span>
+                                    <span class="text-muted">Matchday 38</span>
+                                </div>
+                                <div class="event-time">15:00</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Manchester City</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Chelsea</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Home <span class="odds">1.75</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Draw <span class="odds">3.60</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Away <span class="odds">4.50</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-end mt-2">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-plus-circle me-1"></i> 85 Markets
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Basketball Match -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span class="upcoming-indicator me-2">UPCOMING</span>
+                                    <span class="tournament-badge">NBA</span>
+                                    <span class="text-muted">Conference Finals</span>
+                                </div>
+                                <div class="event-time">19:30</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Boston Celtics</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Miami Heat</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Celtics <span class="odds">1.65</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Heat <span class="odds">2.25</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-end mt-2">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-plus-circle me-1"></i> 62 Markets
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tennis Match -->
+                        <div class="match-card p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span class="upcoming-indicator me-2">UPCOMING</span>
+                                    <span class="tournament-badge">ATP</span>
+                                    <span class="text-muted">French Open Qualifier</span>
+                                </div>
+                                <div class="event-time">12:00</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Carlos Alcaraz</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Jannik Sinner</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Alcaraz <span class="odds">1.85</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Sinner <span class="odds">1.95</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-end mt-2">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-plus-circle me-1"></i> 38 Markets
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="text-decoration-none">View All Tomorrow's Events</a>
+                    </div>
+                </div>
+
+                <!-- Later This Week -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Later This Week</span>
+                        <span class="badge bg-secondary">42 Events</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tournament-badge">French Open</span>
+                                        <span class="fw-bold">Tournament Start</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block text-muted">May 26, 10:00</small>
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-1">View Markets</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tournament-badge">UFC</span>
+                                        <span class="fw-bold">UFC 300: Jones vs Miocic</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block text-muted">May 27, 22:00</small>
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-1">View Markets</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tournament-badge">Formula 1</span>
+                                        <span class="fw-bold">Monaco Grand Prix</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block text-muted">May 28, 14:00</small>
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-1">View Markets</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tournament-badge">MLB</span>
+                                        <span class="fw-bold">Yankees vs Red Sox</span>
+                                    </div>
+                                    <div class="text-end">
+                                        <small class="d-block text-muted">May 29, 19:00</small>
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-1">View Markets</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="text-decoration-none">View Full Calendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip -->
+            <div class="col-lg-3">
+                <div class="bet-slip p-3">
+                    <h5 class="border-bottom pb-2 mb-3">Bet Slip</h5>
+                    <div class="empty-slip text-center p-4">
+                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your bet slip is empty</p>
+                        <p class="small text-muted">Click on odds to add selections</p>
+                    </div>
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-secondary" disabled>Place Bet</button>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <i class="fas fa-calendar-alt me-2"></i> Upcoming Highlights
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <small class="d-block text-muted">May 24</small>
+                            <div class="d-flex justify-content-between">
+                                <span>UEFA Champions League Final</span>
+                                <span class="badge bg-primary">Featured</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <small class="d-block text-muted">May 26</small>
+                            <div class="d-flex justify-content-between">
+                                <span>French Open Tennis</span>
+                                <span class="badge bg-primary">Featured</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <small class="d-block text-muted">May 27</small>
+                            <div class="d-flex justify-content-between">
+                                <span>UFC 300</span>
+                                <span class="badge bg-primary">Featured</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <small class="d-block text-muted">June 1</small>
+                            <div class="d-flex justify-content-between">
+                                <span>NBA Playoffs Start</span>
+                                <span class="badge bg-primary">Featured</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <i class="fas fa-bell me-2"></i> Event Reminders
+                    </div>
+                    <div class="card-body">
+                        <p class="small">Never miss an event! Set reminders for upcoming matches and tournaments.</p>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="reminder1">
+                            <label class="form-check-label" for="reminder1">
+                                Champions League Final
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="reminder2">
+                            <label class="form-check-label" for="reminder2">
+                                French Open Start
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="reminder3">
+                            <label class="form-check-label" for="reminder3">
+                                UFC 300
+                            </label>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-cog me-1"></i> Manage Reminders
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Quick Links
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                My Bets
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Deposit Funds
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Responsible Gaming
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Help & Support
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Bet Early with Tess</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-percentage fa-3x text-secondary mb-3"></i>
+                            <h4>Better Odds</h4>
+                            <p class="text-muted">Get more favorable odds by placing your bets early before the market moves.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-gift fa-3x text-secondary mb-3"></i>
+                            <h4>Early Bird Bonuses</h4>
+                            <p class="text-muted">Enjoy special promotions and odds boosts when you place your bets in advance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-calendar-check fa-3x text-secondary mb-3"></i>
+                            <h4>Plan Ahead</h4>
+                            <p class="text-muted">Organize your betting strategy with our comprehensive calendar of upcoming events.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
