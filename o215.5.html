@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over 215.5 Points - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 40px;
+        }
+        
+        .market-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .market-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .odds-button {
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .odds-button:hover {
+            transform: scale(1.02);
+        }
+        
+        .odds-over {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        .odds-over:hover {
+            background-color: #059669;
+            border-color: #059669;
+            color: white;
+        }
+        
+        .odds-under {
+            background-color: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+        
+        .odds-under:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            color: white;
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .breadcrumb-item.active {
+            color: white;
+        }
+        
+        .market-info {
+            background: linear-gradient(to right, rgba(30, 58, 138, 0.1), rgba(14, 165, 233, 0.1));
+            border-radius: 12px;
+            border: 1px solid rgba(30, 58, 138, 0.2);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">
+                        <a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a>
+                    </button>
+                    <button class="btn btn-accent">
+                        <a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="sports.html">Sports</a></li>
+                    <li class="breadcrumb-item"><a href="basketball.html">Basketball</a></li>
+                    <li class="breadcrumb-item active">Total Points O/U 215.5</li>
+                </ol>
+            </nav>
+            <h1 class="display-5 fw-bold mb-3">Total Points Over/Under 215.5</h1>
+            <p class="lead">LA Lakers vs Boston Celtics - NBA Regular Season</p>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-warning text-dark px-3 py-2">
+                    <i class="fas fa-clock me-1"></i> Today, 20:00 EST
+                </span>
+                <span class="badge bg-info px-3 py-2">
+                    <i class="fas fa-basketball-ball me-1"></i> NBA
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Market Information -->
+            <div class="col-lg-8 mb-4">
+                <!-- Main Betting Market -->
+                <div class="market-card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="mb-0">Total Points - Game</h4>
+                            <small>Combined score of both teams</small>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">Line: 215.5</div>
+                            <small>Updated 5 min ago</small>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <button class="btn odds-button odds-over w-100 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="fw-bold fs-5">OVER 215.5</div>
+                                        <small>Total points will be 216 or more</small>
+                                    </div>
+                                    <div class="fs-4 fw-bold">-110</div>
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn odds-button odds-under w-100 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="fw-bold fs-5">UNDER 215.5</div>
+                                        <small>Total points will be 215 or less</small>
+                                    </div>
+                                    <div class="fs-4 fw-bold">-110</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Information -->
+                <div class="market-info p-4 mb-4">
+                    <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>Market Information</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>How This Market Works:</h6>
+                            <ul class="mb-3">
+                                <li>Bet on whether the total points scored by both teams will be over or under 215.5</li>
+                                <li>All regulation time and overtime points count</li>
+                                <li>If the total is exactly 215.5, it's impossible - no push</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Key Statistics:</h6>
+                            <ul class="mb-3">
+                                <li>Lakers average: 118.2 points per game</li>
+                                <li>Celtics average: 112.8 points per game</li>
+                                <li>Combined average: 231.0 points</li>
+                                <li>Head-to-head average: 219.4 points</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Lines -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Alternative Total Points Lines</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="fw-bold">O/U 213.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-outline-success">O +100</button>
+                                        <button class="btn btn-sm btn-outline-danger">U -120</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="fw-bold">O/U 214.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-outline-success">O -105</button>
+                                        <button class="btn btn-sm btn-outline-danger">U -115</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center bg-light">
+                                    <div class="fw-bold text-primary">O/U 215.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-success">O -110</button>
+                                        <button class="btn btn-sm btn-danger">U -110</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="fw-bold">O/U 216.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-outline-success">O -115</button>
+                                        <button class="btn btn-sm btn-outline-danger">U -105</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="fw-bold">O/U 217.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-outline-success">O -120</button>
+                                        <button class="btn btn-sm btn-outline-danger">U +100</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="border rounded p-3 text-center">
+                                    <div class="fw-bold">O/U 218.5</div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-sm btn-outline-success">O -125</button>
+                                        <button class="btn btn-sm btn-outline-danger">U +105</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Bet Slip -->
+                <div class="bet-slip p-3 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Bet Slip</h5>
+                    <div class="empty-slip text-center p-4">
+                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your bet slip is empty</p>
+                        <p class="small text-muted">Click on odds to add selections</p>
+                    </div>
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-secondary" disabled>Place Bet</button>
+                    </div>
+                </div>
+
+                <!-- Game Stats -->
+                <div class="stats-card p-3 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Game Statistics</h5>
+                    <div class="mb-3">
+                        <h6>LA Lakers</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Avg Points Per Game:</span>
+                            <strong>118.2</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Last 5 Games Avg:</span>
+                            <strong>121.4</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Home Avg:</span>
+                            <strong>122.1</strong>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Boston Celtics</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Avg Points Per Game:</span>
+                            <strong>112.8</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Last 5 Games Avg:</span>
+                            <strong>108.6</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Away Avg:</span>
+                            <strong>109.3</strong>
+                        </div>
+                    </div>
+                    <div class="border-top pt-3">
+                        <h6>Head-to-Head</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Last Meeting Total:</span>
+                            <strong>223 pts</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Season Series Avg:</span>
+                            <strong>219.4 pts</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Over/Under Record:</span>
+                            <strong>3-1 O</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Markets -->
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Related Markets</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Moneyline
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Point Spread
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Player Props
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Quarter Betting
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="helpcenter.html" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Add click handlers for betting buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const bettingButtons = document.querySelectorAll('.odds-button, .btn-outline-success, .btn-outline-danger');
+            
+            bettingButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add visual feedback
+                    this.classList.add('border-warning');
+                    setTimeout(() => {
+                        this.classList.remove('border-warning');
+                    }, 1000);
+                    
+                    // Here you would typically add the selection to the bet slip
+                    console.log('Bet selected:', this.textContent.trim());
+                });
+            });
+        });
+    </script>
+</body>
+</html>
