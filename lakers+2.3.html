@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakers +2.3 - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --lakers-purple: #552583;
+            --lakers-gold: #FDB927;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-lakers {
+            background-color: var(--lakers-purple);
+            border-color: var(--lakers-purple);
+            color: white;
+        }
+        
+        .btn-lakers:hover {
+            background-color: #4a1f73;
+            border-color: #4a1f73;
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .lakers-header {
+            background: linear-gradient(135deg, var(--lakers-purple), var(--lakers-gold));
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lakers-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .game-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--lakers-gold);
+            background: white;
+        }
+        
+        .team-logo {
+            width: 90px;
+            height: 90px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lakers-logo {
+            background: linear-gradient(45deg, var(--lakers-purple), #6b46c1);
+            color: var(--lakers-gold);
+        }
+        
+        .celtics-logo {
+            background: linear-gradient(45deg, #007A33, #00a844);
+            color: white;
+        }
+        
+        .spread-highlight {
+            background: linear-gradient(135deg, var(--lakers-purple), var(--lakers-gold));
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spread-highlight::before {
+            content: '+2.3';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 8rem;
+            font-weight: 900;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .odds-card {
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .odds-card:hover {
+            border-color: var(--lakers-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .odds-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--lakers-purple);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--lakers-gold);
+        }
+        
+        .live-indicator {
+            background: linear-gradient(45deg, var(--danger), #ff6b6b);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .stats-highlight {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .trending-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="basketball.html">Basketball</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lakers Header -->
+    <section class="lakers-header text-center position-relative">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <span class="trending-badge mb-3 d-inline-block">🔥 TRENDING BET</span>
+                    <h1 class="display-3 fw-bold mb-3">Lakers +2.3</h1>
+                    <p class="lead mb-4 fs-4">vs Boston Celtics - NBA Showdown</p>
+                    <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+                        <span class="live-indicator pulse">LIVE BETTING</span>
+                        <span class="fs-5 fw-bold">Today, 20:00 ET</span>
+                        <span class="badge bg-warning text-dark fs-6">Prime Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Game Details -->
+            <div class="col-lg-8 mb-4">
+                <!-- Main Game Card -->
+                <div class="card game-card mb-4">
+                    <div class="card-header bg-primary text-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0"><i class="fas fa-basketball-ball me-2"></i>NBA - Regular Season</h4>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-warning text-dark">Featured</span>
+                                <span class="badge bg-success">Best Odds</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-md-4 text-center">
+                                <div class="team-logo lakers-logo mx-auto mb-3">LAL</div>
+                                <h3 class="fw-bold mb-2">LA Lakers</h3>
+                                <p class="text-muted mb-1">24-18 (13-9 Away)</p>
+                                <small class="text-success fw-bold">3-2 Last 5</small>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="fs-1 fw-bold text-muted mb-3">VS</div>
+                                <p class="mb-1 fw-bold">Today, 20:00 ET</p>
+                                <p class="small text-muted mb-1">Crypto.com Arena</p>
+                                <small class="text-primary">Los Angeles, CA</small>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="team-logo celtics-logo mx-auto mb-3">BOS</div>
+                                <h3 class="fw-bold mb-2">Boston Celtics</h3>
+                                <p class="text-muted mb-1">29-13 (12-10 Road)</p>
+                                <small class="text-success fw-bold">4-1 Last 5</small>
+                            </div>
+                        </div>
+
+                        <!-- Spread Highlight -->
+                        <div class="spread-highlight text-center position-relative">
+                            <h2 class="mb-3 fw-bold">Lakers +2.3 Points</h2>
+                            <p class="mb-0 fs-5">Lakers get a 2.3 point head start - Perfect underdog value!</p>
+                            <div class="mt-3">
+                                <small class="opacity-75">Updated odds • Live pricing</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Betting Options -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Point Spread Betting</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card odds-card h-100 border-3">
+                                    <div class="card-body text-center p-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title text-primary mb-0">Lakers +2.3</h5>
+                                            <span class="trending-badge">HOT</span>
+                                        </div>
+                                        <div class="odds-value mb-3">-108</div>
+                                        <p class="card-text mb-4">Lakers get 2.3 points added to their final score. Win if they lose by 2 or less, or win outright.</p>
+                                        <button class="btn btn-lakers btn-lg w-100 fw-bold" id="lakersSpreadBtn">
+                                            <i class="fas fa-plus me-2"></i>Bet Lakers +2.3
+                                        </button>
+                                        <small class="text-muted mt-2 d-block">73% of bets on Lakers</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card odds-card h-100 border-3">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title text-success mb-3">Celtics -2.3</h5>
+                                        <div class="odds-value mb-3">-112</div>
+                                        <p class="card-text mb-4">Celtics must win by more than 2.3 points. They need to win by 3+ points to cover.</p>
+                                        <button class="btn btn-outline-success btn-lg w-100 fw-bold">
+                                            <i class="fas fa-minus me-2"></i>Bet Celtics -2.3
+                                        </button>
+                                        <small class="text-muted mt-2 d-block">27% of bets on Celtics</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Betting Markets -->
+                <div class="card">
+                    <div class="card-header bg-secondary text-white py-3">
+                        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Additional Markets</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="text-center p-4 border rounded-3 h-100">
+                                    <h6 class="fw-bold mb-3">Moneyline</h6>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary">Lakers +118</button>
+                                        <button class="btn btn-outline-primary">Celtics -138</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center p-4 border rounded-3 h-100">
+                                    <h6 class="fw-bold mb-3">Total Points</h6>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary">Over 224.5 (-110)</button>
+                                        <button class="btn btn-outline-primary">Under 224.5 (-110)</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center p-4 border rounded-3 h-100">
+                                    <h6 class="fw-bold mb-3">1st Half Spread</h6>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary">Lakers +1.5 (-110)</button>
+                                        <button class="btn btn-outline-primary">Celtics -1.5 (-110)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip & Info -->
+            <div class="col-lg-4">
+                <!-- Bet Slip -->
+                <div class="bet-slip p-4 mb-4">
+                    <h5 class="border-bottom pb-3 mb-4">
+                        <i class="fas fa-ticket-alt me-2"></i>Bet Slip
+                        <span class="badge bg-primary ms-2" id="betCount">0</span>
+                    </h5>
+                    <div id="betSlipContent" class="empty-slip text-center p-4">
+                        <i class="fas fa-basketball-ball fa-3x text-muted mb-3"></i>
+                        <p class="text-muted fw-bold">Ready for Lakers +2.3?</p>
+                        <p class="small text-muted">Click the button above to add your bet</p>
+                        <div class="mt-3">
+                            <small class="text-success">✓ Best odds guaranteed</small>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-grid">
+                        <button class="btn btn-lakers btn-lg fw-bold" id="placeBetBtn" disabled>
+                            <i class="fas fa-dollar-sign me-2"></i>Place Bet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Stats -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Head-to-Head Stats</h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="row text-center mb-3 fw-bold">
+                            <div class="col-4 text-primary">Lakers</div>
+                            <div class="col-4">Category</div>
+                            <div class="col-4 text-success">Celtics</div>
+                        </div>
+                        <hr>
+                        <div class="row text-center mb-2">
+                            <div class="col-4 fw-bold">112.8</div>
+                            <div class="col-4 small">PPG</div>
+                            <div class="col-4 fw-bold">118.7</div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-4 fw-bold">109.2</div>
+                            <div class="col-4 small">Opp PPG</div>
+                            <div class="col-4 fw-bold">110.8</div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-4 fw-bold">47.1%</div>
+                            <div class="col-4 small">FG%</div>
+                            <div class="col-4 fw-bold">48.3%</div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-4 fw-bold">36.5%</div>
+                            <div class="col-4 small">3P%</div>
+                            <div class="col-4 fw-bold">38.1%</div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-4 fw-bold">44.2</div>
+                            <div class="col-4 small">RPG</div>
+                            <div class="col-4 fw-bold">46.1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Betting Trends -->
+                <div class="card">
+                    <div class="card-header bg-warning text-dark py-3">
+                        <h6 class="mb-0"><i class="fas fa-trending-up me-2"></i>Betting Trends</h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small class="fw-bold">Lakers ATS (Home)</small>
+                                <small class="text-success">15-7</small>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-success" style="width: 68%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small class="fw-bold">Celtics ATS (Away)</small>
+                                <small class="text-danger">10-12</small>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-danger" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small class="fw-bold">O/U Trend (Lakers)</small>
+                                <small class="text-primary">Over 13-9</small>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-primary" style="width: 59%"></div>
+                            </div>
+                        </div>
+                        <div class="stats-highlight mt-3 text-center">
+                            <small class="fw-bold">Lakers are 7-3 ATS in last 10 vs Celtics</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>Your premier destination for NBA betting. Get the best odds on Lakers games and all your favorite teams with live updates and expert analysis.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">NBA Betting</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Point Spreads</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Moneylines</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Totals</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Player Props</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Betting Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Lakers +2.3 Insights</h5>
+                    <p>This spread reflects the Celtics' slight road advantage, but the Lakers' home court could be the difference maker.</p>
+                    <div class="stats-highlight mt-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Public Betting:</span>
+                            <span>73% Lakers</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Sharp Money:</span>
+                            <span>Mixed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 21+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Enhanced bet slip functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lakersBtn = document.getElementById('lakersSpreadBtn');
+            const betSlipContent = document.getElementById('betSlipContent');
+            const placeBetBtn = document.getElementById('placeBetBtn');
+            const betCount = document.getElementById('betCount');
+            
+            lakersBtn.addEventListener('click', function() {
+                betSlipContent.innerHTML = `
+                    <div class="border rounded-3 p-3 mb-3 bg-light">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <strong class="text-primary">Lakers +2.3</strong>
+                                <br><small class="text-muted">vs Celtics</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger" onclick="clearBetSlip()" title="Remove bet">×</button>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="fw-bold">Odds:</span>
+                            <span class="fw-bold text-success">-108</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Bet Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" placeholder="25" min="1" max="1000" id="betAmount">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span>To Win:</span>
+                            <span id="toWin">$23.15</span>
+                        </div>
+                    </div>
+                `;
+                placeBetBtn.disabled = false;
+                placeBetBtn.classList.remove('btn-secondary');
+                placeBetBtn.classList.add('btn-lakers');
+                betCount.textContent = '1';
+                
+                // Add bet amount calculator
+                const betAmountInput = document.getElementById('betAmount');
+                const toWinSpan = document.getElementById('toWin');
+                
+                betAmountInput.addEventListener('input', function() {
+                    const amount = parseFloat(this.value) || 0;
+                    const toWin = (amount / 1.08).toFixed(2);
+                    toWinSpan.textContent = `$${toWin}`;
+                });
+            });
+            
+            placeBetBtn.addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Bet placed successfully! Good luck with Lakers +2.3!');
+                    clearBetSlip();
+                }
+            });
+        });
+        
+        function clearBetSlip() {
+            document.getElementById('betSlipContent').innerHTML = `
+                <i class="fas fa-basketball-ball fa-3x text-muted mb-3"></i>
+                <p class="text-muted fw-bold">Ready for Lakers +2.3?</p>
+                <p class="small text-muted">Click the button above to add your bet</p>
+                <div class="mt-3">
+                    <small class="text-success">✓ Best odds guaranteed</small>
+                </div>
+            `;
+            const placeBetBtn = document.getElementById('placeBetBtn');
+            placeBetBtn.disabled = true;
+            placeBetBtn.classList.remove('btn-lakers');
+            placeBetBtn.classList.add('btn-secondary');
+            document.getElementById('betCount').textContent = '0';
+        }
+    </script>
+</body>
+</html>
