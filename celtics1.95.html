@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tess Betting - Sports Betting Platform</title>
+    <title>Celtics 1.95 - Boston Celtics Betting Platform</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a;
-            --secondary: #0ea5e9;
-            --accent: #f59e0b;
+            --primary: #007A33;
+            --secondary: #BA9653;
+            --accent: #000000;
+            --celtics-green: #007A33;
+            --celtics-gold: #BA9653;
+            --celtics-black: #000000;
             --light: #f3f4f6;
             --dark: #111827;
             --success: #10b981;
@@ -25,7 +28,7 @@
         }
         
         .navbar {
-            background-color: var(--primary);
+            background-color: var(--celtics-green);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
@@ -41,33 +44,39 @@
         }
         
         .nav-link:hover {
-            color: white !important;
+            color: var(--celtics-gold) !important;
         }
         
         .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
+            background-color: var(--celtics-green);
+            border-color: var(--celtics-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: #005a26;
+            border-color: #005a26;
         }
         
         .btn-secondary {
-            background-color: var(--secondary);
-            border-color: var(--secondary);
+            background-color: var(--celtics-gold);
+            border-color: var(--celtics-gold);
+            color: var(--celtics-black);
         }
         
         .btn-accent {
-            background-color: var(--accent);
-            border-color: var(--accent);
+            background-color: var(--celtics-black);
+            border-color: var(--celtics-black);
             color: white;
         }
         
         .btn-accent:hover {
-            background-color: #e89a0c;
-            border-color: #e89a0c;
+            background-color: #333333;
+            border-color: #333333;
             color: white;
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 122, 51, 0.9), rgba(0, 122, 51, 0.7)), url('/placeholder.svg?height=600&width=1200') center/cover no-repeat;
             color: white;
             padding: 100px 0;
         }
@@ -85,19 +94,29 @@
         }
         
         .card-header {
-            background-color: var(--primary);
+            background-color: var(--celtics-green);
             color: white;
             font-weight: bold;
         }
         
         .match-card {
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--celtics-green);
             margin-bottom: 1rem;
         }
         
         .odds {
             font-weight: bold;
-            color: var(--accent);
+            color: var(--celtics-gold);
+        }
+        
+        .featured-odds {
+            font-weight: bold;
+            color: var(--celtics-green);
+            font-size: 1.2rem;
+            background-color: var(--celtics-gold);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--celtics-black);
         }
         
         .live-indicator {
@@ -110,7 +129,7 @@
         }
         
         .footer {
-            background-color: var(--dark);
+            background-color: var(--celtics-black);
             color: white;
         }
         
@@ -134,11 +153,50 @@
         }
         
         .promotion-banner {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--celtics-green), var(--celtics-gold));
             color: white;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
+        }
+        
+        .celtics-highlight {
+            background-color: var(--celtics-green);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .badge.bg-primary {
+            background-color: var(--celtics-green) !important;
+        }
+        
+        .btn-outline-primary {
+            color: var(--celtics-green);
+            border-color: var(--celtics-green);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--celtics-green);
+            border-color: var(--celtics-green);
+        }
+        
+        .text-primary {
+            color: var(--celtics-green) !important;
+        }
+        
+        .celtics-logo {
+            width: 30px;
+            height: 30px;
+            background-color: var(--celtics-green);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -147,8 +205,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-dice me-2"></i>
-                Tess Betting
+                <i class="fas fa-basketball-ball me-2"></i>
+                Celtics 1.95
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -156,24 +214,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link active" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sports.html">Sports</a>
+                        <a class="nav-link" href="#celtics">Celtics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                        <a class="nav-link" href="#nba">NBA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="casino.html">Casino</a>
+                        <a class="nav-link" href="#live">Live Betting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="promotions.html">Promotions</a>
+                        <a class="nav-link" href="#promotions">Promotions</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2"><a href="login.html"target="_blank" style="text-decoration: none; color: inherite">log in</a></button>
-                    <button class="btn btn-accent"><a href="signup.html" target="_blank" style="text-decoration: none; color: inherite">signup</a></button>
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -182,10 +240,14 @@
     <!-- Hero Section -->
     <section class="hero text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Welcome to Tess Betting</h1>
-            <p class="lead mb-5">The ultimate sports betting experience with the best odds and exclusive bonuses</p>
-            <button class="btn btn-accent btn-lg px-5 me-3"><a href="signupnow.html" target="_blank" style="text-decoration: none; color: inherite">sign up now</a></button>
-            <button class="btn btn-outline-light btn-lg px-5"><a href="learnmore.html" target="_blank" style="text-decoration: none; color: inherite">learn more</a></button>
+            <h1 class="display-4 fw-bold mb-4">Celtics 1.95 Betting</h1>
+            <p class="lead mb-5">Premium Boston Celtics betting with competitive 1.95 odds and championship insights</p>
+            <div class="celtics-highlight mb-4">
+                <h3>🏀 Featured: Boston Celtics @ 1.95 Odds</h3>
+                <p class="mb-0">Don't miss out on today's premium Celtics betting opportunity</p>
+            </div>
+            <button class="btn btn-accent btn-lg px-5 me-3">Bet on Celtics</button>
+            <button class="btn btn-outline-light btn-lg px-5">View All Odds</button>
         </div>
     </section>
 
@@ -194,11 +256,11 @@
         <div class="promotion-banner">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h3>Welcome Bonus: 100% match up to $500</h3>
-                    <p class="mb-0">New customers only. Min deposit $20. Wagering requirements apply.</p>
+                    <h3>Celtics Special: 100% match up to $500</h3>
+                    <p class="mb-0">New Celtics fans only. Min deposit $20. Championship spirit required.</p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <button class="btn btn-accent"><a href="claimnow.html" target="_blank" style="text-decoration: none; color: inherite">claim now</a></button>
+                    <button class="btn btn-accent">Claim Celtics Bonus</button>
                 </div>
             </div>
         </div>
@@ -211,47 +273,45 @@
             <div class="col-lg-3 mb-4">
                 <div class="list-group">
                     <div class="list-group-item bg-primary text-white">
-                        <i class="fas fa-trophy me-2"></i> Sports
+                        <i class="fas fa-trophy me-2"></i> Basketball
                     </div>
-                    <a href="football.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Football <span class="badge bg-primary rounded-pill">42</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Boston Celtics <span class="badge bg-primary rounded-pill">18</span>
                     </a>
-                    <a href="basketball.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Basketball <span class="badge bg-primary rounded-pill">28</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        NBA Eastern Conference <span class="badge bg-primary rounded-pill">15</span>
                     </a>
-                    <a href="tennis.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Tennis <span class="badge bg-primary rounded-pill">16</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        NBA Western Conference <span class="badge bg-primary rounded-pill">15</span>
                     </a>
-                    <a href="baseball.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Baseball <span class="badge bg-primary rounded-pill">22</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        NBA Playoffs <span class="badge bg-primary rounded-pill">8</span>
                     </a>
-                    <a href="hockey.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Hockey <span class="badge bg-primary rounded-pill">15</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        College Basketball <span class="badge bg-primary rounded-pill">22</span>
                     </a>
-                    <a href="soccer.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Soccer <span class="badge bg-primary rounded-pill">38</span>
-                    </a>
-                    <a href="golf.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        Golf <span class="badge bg-primary rounded-pill">7</span>
-                    </a>
-                    <a href="mma.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        MMA <span class="badge bg-primary rounded-pill">12</span>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        EuroLeague <span class="badge bg-primary rounded-pill">12</span>
                     </a>
                 </div>
 
                 <div class="stats-card mt-4 p-3">
-                    <h5 class="border-bottom pb-2">Top Statistics</h5>
+                    <h5 class="border-bottom pb-2">Celtics Stats</h5>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Most Popular:</span>
-                        <span class="fw-bold">Football</span>
+                        <span>Current Odds:</span>
+                        <span class="fw-bold featured-odds">1.95</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Active Users:</span>
-                        <span class="fw-bold">5,428</span>
+                        <span>Season Record:</span>
+                        <span class="fw-bold">42-18</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Live Matches:</span>
-                        <span class="fw-bold text-danger">24</span>
+                        <span>Conference Rank:</span>
+                        <span class="fw-bold text-success">#2</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Championships:</span>
+                        <span class="fw-bold" style="color: var(--celtics-gold);">18</span>
                     </div>
                 </div>
             </div>
@@ -260,57 +320,21 @@
             <div class="col-lg-6 mb-4">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Today's Top Matches</span>
+                        <span>Featured Celtics Matches</span>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-light active"><a href="all.html" target="_blank" style="text-decoration: none; color: inherite">all</a></button>
-                            <button class="btn btn-light active"><a href="live.html" target="_blank" style="text-decoration: none; color: inherite">live</a></button>
-                            <button class="btn btn-light"><a href="upcoming.html" target="_blank" style="text-decoration: none; color: inherite">upcoming</a></button>
+                            <button class="btn btn-light active">All</button>
+                            <button class="btn btn-light">Live</button>
+                            <button class="btn btn-light">Upcoming</button>
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <!-- Live Match -->
-                        <div class="match-card p-3 border-bottom">
+                        <!-- Featured Match with 1.95 odds -->
+                        <div class="match-card p-3 border-bottom" style="background-color: #f8f9fa;">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div>
-                                    <span class="live-indicator me-2"><a href="LIVES.html" target="_blank" style="text-decoration: none; color: inherite">LIVES</a></span>
-                                    <span class="text-muted"><a href="footballs.html" target="_blank" style="text-decoration: none; color: inherite">footballs</a></span>
+                                    <span class="badge bg-warning text-dark me-2">FEATURED</span>
+                                    <span class="text-muted">NBA - Eastern Conference</span>
                                 </div>
-                                <small>65:23</small>
-                            </div>
-                            <div class="row align-items-center">
-                                <div class="col-5 text-center">
-                                    <strong>Arsenal</strong>
-                                </div>
-                                <div class="col-2 text-center">
-                                    <div class="fw-bold">2 - 1</div>
-                                </div>
-                                <div class="col-5 text-center">
-                                    <strong>Liverpool</strong>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds">2.10</span>
-                                    </button>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Draw <span class="odds">3.40</span>
-                                    </button>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds">3.75</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Regular Match -->
-                        <div class="match-card p-3 border-bottom">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Basketball - NBA</span>
                                 <small>Today, 20:00</small>
                             </div>
                             <div class="row align-items-center">
@@ -321,117 +345,139 @@
                                     <div class="text-muted">vs</div>
                                 </div>
                                 <div class="col-5 text-center">
+                                    <div class="celtics-logo">C</div>
                                     <strong>Boston Celtics</strong>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds"><a href="oddLA.html" target="_blank" style="text-decoration: none; color: inherite"> 1.85</a></span>
+                                        Lakers <span class="odds">1.85</span>
                                     </button>
                                 </div>
                                 <div class="col-6">
-                                <button class="btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds"><a href="celtics1.95.html" target="_blank" style="text-decoration: none; color: inherite"> 1.95</a></span></span>
+                                    <button class="btn btn-primary btn-sm w-100">
+                                        Celtics <span class="featured-odds">1.95</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Regular Match -->
+                        <!-- Live Celtics Match -->
                         <div class="match-card p-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Tennis - ATP</span>
-                                <small>Today, 16:30</small>
+                                <div>
+                                    <span class="live-indicator me-2">LIVE</span>
+                                    <span class="text-muted">NBA - Regular Season</span>
+                                </div>
+                                <small>Q3 8:45</small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>Rafael Nadal</strong>
+                                    <div class="celtics-logo">C</div>
+                                    <strong>Boston Celtics</strong>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <div class="text-muted">vs</div>
+                                    <div class="fw-bold">89 - 82</div>
                                 </div>
-                                <div class="col-5 text-center"
-                                    <strong>Novak Djokovic</strong>
+                                <div class="col-5 text-center">
+                                    <strong>Miami Heat</strong>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Nadal <span class="odds">2.25</span>
+                                    <button class="btn btn-primary btn-sm w-100">
+                                        Celtics <span class="odds">1.45</span>
                                     </button>
                                 </div>
                                 <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Djokovic <span class="odds">1.65</span>
+                                        Heat <span class="odds">2.75</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Regular Match -->
-                        <div class="match-card p-3">
+                        <!-- Upcoming Celtics Match -->
+                        <div class="match-card p-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted">Soccer - Premier League</span>
-                                <small>Tomorrow, 15:00</small>
+                                <span class="text-muted">NBA - Eastern Conference</span>
+                                <small>Tomorrow, 19:30</small>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-5 text-center">
-                                    <strong>Manchester City</strong>
+                                    <strong>Philadelphia 76ers</strong>
                                 </div>
                                 <div class="col-2 text-center">
                                     <div class="text-muted">vs</div>
                                 </div>
                                 <div class="col-5 text-center">
-                                    <strong>Chelsea</strong>
+                                    <div class="celtics-logo">C</div>
+                                    <strong>Boston Celtics</strong>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Home <span class="odds">1.75</span>
+                                        76ers <span class="odds">2.20</span>
                                     </button>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <button class="btn btn-outline-primary btn-sm w-100">
-                                        Draw <span class="odds">3.60</span>
+                                        Celtics <span class="odds">1.65</span>
                                     </button>
                                 </div>
-                                <div class="col-4">
-                                    <button class="btn btn-outline-primary btn-sm w-100">
-                                        Away <span class="odds">4.50</span>
+                            </div>
+                        </div>
+
+                        <!-- Championship Futures -->
+                        <div class="match-card p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">NBA Championship Futures</span>
+                                <small>Season 2024-25</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-12 text-center mb-3">
+                                    <div class="celtics-logo">C</div>
+                                    <strong>Boston Celtics to Win Championship</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary btn-sm w-100">
+                                        Celtics Championship <span class="featured-odds">+450</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="#" class="text-decoration-none">View All Matches</a>
+                        <a href="#" class="text-decoration-none">View All Celtics Matches</a>
                     </div>
                 </div>
 
                 <!-- Featured Events -->
                 <div class="card">
-                    <div class="card-header">Featured Events</div>
+                    <div class="card-header">Celtics Featured Events</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100 feature-card">
-                                    <img src="/api/placeholder/400/200" class="card-img-top" alt="UEFA Champions League">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="NBA Playoffs">
                                     <div class="card-body">
-                                        <h5 class="card-title">UEFA Champions League</h5>
-                                        <p class="card-text">Finals: May 24, 2025</p>
+                                        <h5 class="card-title">NBA Playoffs 2025</h5>
+                                        <p class="card-text">Celtics Championship Run</p>
                                         <button class="btn btn-sm btn-primary">View Markets</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100 feature-card">
-                                    <img src="/api/placeholder/400/200" class="card-img-top" alt="NBA Playoffs">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Celtics vs Lakers">
                                     <div class="card-body">
-                                        <h5 class="card-title">NBA Playoffs</h5>
-                                        <p class="card-text">Starting June 1, 2025</p>
-                                        <button class="btn btn-sm btn-primary">View Markets</button>
+                                        <h5 class="card-title">Celtics vs Lakers</h5>
+                                        <p class="card-text">Historic Rivalry @ 1.95</p>
+                                        <button class="btn btn-sm btn-primary">Bet Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -443,43 +489,43 @@
             <!-- Bet Slip -->
             <div class="col-lg-3">
                 <div class="bet-slip p-3">
-                    <h5 class="border-bottom pb-2 mb-3">Bet Slip</h5>
+                    <h5 class="border-bottom pb-2 mb-3">Celtics Bet Slip</h5>
                     <div class="empty-slip text-center p-4">
-                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
-                        <p class="text-muted">Your bet slip is empty</p>
-                        <p class="small text-muted">Click on odds to add selections</p>
+                        <i class="fas fa-basketball-ball fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your Celtics slip is empty</p>
+                        <p class="small text-muted">Click on 1.95 odds to start</p>
                     </div>
                     <div class="mt-3 d-grid">
-                        <button class="btn btn-secondary" disabled>Place Bet</button>
+                        <button class="btn btn-secondary" disabled>Place Celtics Bet</button>
                     </div>
                 </div>
 
                 <div class="card mt-4">
                     <div class="card-header">
-                        Quick Links
+                        Celtics Quick Links
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                My Bets
+                                My Celtics Bets
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                Deposit Funds
+                                Celtics Stats
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                Responsible Gaming
+                                Championship Odds
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
-                                Help & Support
+                                Celtics News
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
@@ -492,14 +538,14 @@
     <!-- Features Section -->
     <section class="bg-light py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Why Choose Tess Betting</h2>
+            <h2 class="text-center mb-5">Why Choose Celtics 1.95</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
-                            <h4>Competitive Odds</h4>
-                            <p class="text-muted">We offer some of the best odds in the industry, ensuring maximum value for your bets.</p>
+                            <i class="fas fa-basketball-ball fa-3x text-primary mb-3"></i>
+                            <h4>Premium Celtics Odds</h4>
+                            <p class="text-muted">Competitive 1.95 odds and exclusive Celtics betting markets with championship insights.</p>
                         </div>
                     </div>
                 </div>
@@ -507,9 +553,9 @@
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                            <h4>Secure & Safe</h4>
-                            <p class="text-muted">Our platform uses the latest security measures to protect your data and transactions.</p>
+                            <i class="fas fa-trophy fa-3x text-primary mb-3"></i>
+                            <h4>Championship Heritage</h4>
+                            <p class="text-muted">18-time NBA Champions. Bet on the most successful franchise in basketball history.</p>
                         </div>
                     </div>
                 </div>
@@ -517,9 +563,9 @@
                 <div class="col-md-4">
                     <div class="card h-100 text-center p-4 feature-card">
                         <div class="card-body">
-                            <i class="fas fa-headset fa-3x text-primary mb-3"></i>
-                            <h4>24/7 Support</h4>
-                            <p class="text-muted">Our dedicated support team is always ready to assist you with any questions or issues.</p>
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h4>Live Celtics Data</h4>
+                            <p class="text-muted">Real-time statistics, player performance data, and championship probability tracking.</p>
                         </div>
                     </div>
                 </div>
@@ -532,8 +578,8 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h4 class="mb-4">Tess Betting</h4>
-                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <h4 class="mb-4">Celtics 1.95</h4>
+                    <p>The premier destination for Boston Celtics betting. Featuring competitive 1.95 odds, championship insights, and the legacy of 18-time NBA Champions.</p>
                     <div class="d-flex gap-3 mt-4">
                         <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
@@ -543,45 +589,45 @@
                 </div>
                 
                 <div class="col-lg-2 col-md-6">
-                    <h5 class="mb-4">Quick Links</h5>
+                    <h5 class="mb-4">Celtics Betting</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Game Lines</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Player Props</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Championship Futures</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Season Specials</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-2 col-md-6">
                     <h5 class="mb-4">Support</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="helpcenter.html" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Celtics FAQs</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-4">
-                    <h5 class="mb-4">Newsletter</h5>
-                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <h5 class="mb-4">Celtics Newsletter</h5>
+                    <p>Subscribe for exclusive Celtics betting tips, championship updates, and premium 1.95 odds alerts.</p>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Your email address">
-                        <button class="btn btn-accent" type="button">Subscribe</button>
+                        <button class="btn btn-accent" type="button">Join Celtics Nation</button>
                     </div>
                     <div class="mt-4">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
-                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method">
                     </div>
                 </div>
             </div>
             
             <div class="border-top border-secondary mt-5 pt-4 text-center">
-                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+                <p class="mb-0">&copy; 2025 Celtics 1.95. All rights reserved. 18+ Gamble Responsibly. Banner 18 Forever.</p>
             </div>
         </div>
     </footer>
