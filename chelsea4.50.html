@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chelsea to Win vs Man City - Odds 4.50 | Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --chelsea-blue: #034694;
+            --chelsea-accent: #0a7cff;
+            --city-blue: #6cabdd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .btn-chelsea {
+            background-color: var(--chelsea-blue);
+            border-color: var(--chelsea-blue);
+            color: white;
+        }
+        
+        .btn-chelsea:hover {
+            background-color: var(--chelsea-accent);
+            border-color: var(--chelsea-accent);
+            color: white;
+        }
+        
+        .match-header {
+            background: linear-gradient(135deg, var(--chelsea-blue), var(--chelsea-accent));
+            color: white;
+            padding: 40px 0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chelsea-card {
+            border-top: 4px solid var(--chelsea-blue);
+        }
+        
+        .city-card {
+            border-top: 4px solid var(--city-blue);
+        }
+        
+        .odds-highlight {
+            background-color: var(--chelsea-blue);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .bet-button {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .bet-button:hover {
+            background-color: #059669;
+            border-color: #059669;
+            color: white;
+        }
+        
+        .stats-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .match-info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--chelsea-blue);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .league-badge {
+            background: linear-gradient(45deg, #37003c, #00ff87);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .chelsea-highlight {
+            background: linear-gradient(135deg, var(--chelsea-blue), var(--chelsea-accent));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .upset-alert {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .value-meter {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .value-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="soccer.html">Soccer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Match Header -->
+    <div class="container mt-4">
+        <div class="match-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-futbol me-2"></i>
+                            <span class="league-badge me-2">Premier League</span>
+                            <span class="badge bg-warning text-dark">Tomorrow, 15:00</span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-2">Manchester City vs Chelsea</h1>
+                        <p class="lead mb-0">Etihad Stadium • Chelsea Away Win Market</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="odds-highlight">
+                            Chelsea to Win<br>
+                            <span style="font-size: 2rem;">4.50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upset Alert Banner -->
+    <div class="container">
+        <div class="chelsea-highlight">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3><i class="fas fa-exclamation-triangle me-2"></i>Upset Alert: Chelsea Value Bet</h3>
+                    <p class="mb-0">Chelsea has won 3 of their last 5 away matches against Manchester City. At odds of 4.50, this represents significant value.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="upset-alert">
+                        <i class="fas fa-bolt me-2"></i>High Value Bet
+                    </div>
+                    <div class="mt-2">
+                        <small>Value Rating</small>
+                        <div class="value-meter">
+                            <div class="value-fill" style="width: 85%"></div>
+                        </div>
+                        <small>85/100</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Chelsea Analysis -->
+            <div class="col-lg-8">
+                <!-- Team Comparison -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="team-card city-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/100/100" alt="Manchester City" class="rounded-circle mb-3">
+                                <h4 style="color: var(--city-blue);">Manchester City</h4>
+                                <p class="text-muted">Home Team</p>
+                                <div class="odds-highlight" style="background-color: var(--city-blue);">
+                                    Home Win: 1.75
+                                </div>
+                            </div>
+                            <div class="row text-center mt-3">
+                                <div class="col-6">
+                                    <strong>Home Record</strong><br>
+                                    <span class="text-primary">12-2-1</span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Goals Scored</strong><br>
+                                    <span class="text-primary">38</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="team-card chelsea-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/100/100" alt="Chelsea" class="rounded-circle mb-3">
+                                <h4 style="color: var(--chelsea-blue);">Chelsea</h4>
+                                <p class="text-muted">Away Team</p>
+                                <div class="odds-highlight">
+                                    Away Win: 4.50
+                                </div>
+                            </div>
+                            <div class="row text-center mt-3">
+                                <div class="col-6">
+                                    <strong>Away Record</strong><br>
+                                    <span class="text-primary">7-4-4</span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Goals Scored</strong><br>
+                                    <span class="text-primary">24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chelsea's Path to Victory -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">Chelsea's Path to Victory</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Key Strengths</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Counter-attacking speed
+                                    <span class="badge bg-success rounded-pill">9/10</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Set piece effectiveness
+                                    <span class="badge bg-success rounded-pill">8/10</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Defensive organization
+                                    <span class="badge bg-success rounded-pill">8/10</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Big match mentality
+                                    <span class="badge bg-success rounded-pill">9/10</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">City's Vulnerabilities</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    High defensive line
+                                    <i class="fas fa-check text-success"></i>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Susceptible to counter
+                                    <i class="fas fa-check text-success"></i>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Key defender injured
+                                    <i class="fas fa-check text-success"></i>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Recent defensive errors
+                                    <i class="fas fa-check text-success"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Head to Head Stats -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">Head-to-Head Statistics</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Total Meetings:</strong></td>
+                                    <td class="text-end">166</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chelsea Wins:</strong></td>
+                                    <td class="text-end text-success">65</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Man City Wins:</strong></td>
+                                    <td class="text-end text-danger">68</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Draws:</strong></td>
+                                    <td class="text-end">33</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>At Etihad:</strong></td>
+                                    <td class="text-end">City 45-20</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>This Season:</strong></td>
+                                    <td class="text-end text-success">Chelsea 1-0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last 5 Meetings:</strong></td>
+                                    <td class="text-end">Chelsea 3-2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Goals Average:</strong></td>
+                                    <td class="text-end">2.8 per game</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Players -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">Chelsea's Key Players</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="Player">
+                                <div>
+                                    <h6 class="mb-1">Raheem Sterling</h6>
+                                    <p class="text-muted mb-0">Former City player with point to prove</p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>Goals this season</small>
+                                    <small>8</small>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Goals vs City</small>
+                                    <small>3</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="Player">
+                                <div>
+                                    <h6 class="mb-1">Enzo Fernández</h6>
+                                    <p class="text-muted mb-0">Midfield maestro</p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>Pass accuracy</small>
+                                    <small>91%</small>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Chances created</small>
+                                    <small>42</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="Player">
+                                <div>
+                                    <h6 class="mb-1">Reece James</h6>
+                                    <p class="text-muted mb-0">Defensive rock</p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>Tackles won</small>
+                                    <small>56</small>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Assists</small>
+                                    <small>7</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="Player">
+                                <div>
+                                    <h6 class="mb-1">Nicolas Jackson</h6>
+                                    <p class="text-muted mb-0">Pacey striker</p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>Goals this season</small>
+                                    <small>12</small>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Conversion rate</small>
+                                    <small>18%</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Chelsea Markets -->
+                <div class="stats-table p-4">
+                    <h4 class="border-bottom pb-3 mb-4">Related Chelsea Markets</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Chelsea Winning Margins</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Chelsea by 1 <span class="float-end">7.50</span></button>
+                                    <button class="btn btn-outline-primary">Chelsea by 2 <span class="float-end">15.00</span></button>
+                                    <button class="btn btn-outline-primary">Chelsea by 3+ <span class="float-end">34.00</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Chelsea Scorers</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Sterling <span class="float-end">4.00</span></button>
+                                    <button class="btn btn-outline-primary">Jackson <span class="float-end">3.75</span></button>
+                                    <button class="btn btn-outline-primary">Palmer <span class="float-end">4.50</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Chelsea Clean Sheet</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Yes <span class="float-end">6.50</span></button>
+                                    <button class="btn btn-outline-primary">No <span class="float-end">1.15</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Chelsea Win & Both Teams Score</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Yes <span class="float-end">8.00</span></button>
+                                    <button class="btn btn-outline-primary">No <span class="float-end">1.10</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip & Match Info -->
+            <div class="col-lg-4">
+                <!-- Quick Bet -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Quick Bet - Chelsea to Win</h5>
+                    <div class="text-center mb-3">
+                        <div class="odds-highlight mb-3">
+                            4.50
+                        </div>
+                        <p class="text-muted">Potential return for $100 bet: <strong>$450</strong></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bet Amount ($)</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" value="100">
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn bet-button">
+                            <i class="fas fa-ticket-alt me-2"></i>
+                            Place Bet - $450 Return
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chelsea Form -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Chelsea's Recent Form</h5>
+                    <div class="mb-3">
+                        <h6>Last 5 Matches</h6>
+                        <div class="d-flex gap-1 mb-2">
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-danger">L</span>
+                            <span class="badge bg-warning">D</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-success">W</span>
+                        </div>
+                        <small class="text-muted">3 wins, 1 draw, 1 loss in last 5</small>
+                    </div>
+                    <div>
+                        <h6>Away Form</h6>
+                        <div class="d-flex gap-1 mb-2">
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-warning">D</span>
+                            <span class="badge bg-danger">L</span>
+                            <span class="badge bg-success">W</span>
+                        </div>
+                        <small class="text-muted">3 wins, 1 draw, 1 loss in last 5 away</small>
+                    </div>
+                </div>
+
+                <!-- Match Information -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Match Information</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Competition:</span>
+                        <span class="fw-bold">Premier League</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Venue:</span>
+                        <span class="fw-bold">Etihad Stadium</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Date:</span>
+                        <span class="fw-bold">Tomorrow</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Kick-off:</span>
+                        <span class="fw-bold">15:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Referee:</span>
+                        <span class="fw-bold">Michael Oliver</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Weather:</span>
+                        <span class="fw-bold">Cloudy, 12°C</span>
+                    </div>
+                </div>
+
+                <!-- Chelsea Insights -->
+                <div class="match-info-card p-4">
+                    <h5 class="border-bottom pb-2 mb-3">Chelsea Betting Insights</h5>
+                    <div class="mb-3">
+                        <h6><i class="fas fa-lightbulb text-warning me-2"></i>Why Chelsea Could Win</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Strong recent form (3 wins in 5)</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Won last meeting 1-0</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>City missing key defender</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Counter-attack suits matchup</li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Expert Tip:</strong> Chelsea's odds of 4.50 represent significant value given their recent head-to-head record against City.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="soccer.html" class="text-white text-decoration-none">Soccer</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Bet Responsibly</h5>
+                    <p>Gambling can be addictive. Please play responsibly and within your means.</p>
+                    <div class="mt-3">
+                        <img src="/api/placeholder/50/30" alt="18+" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Responsible Gaming" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Premier League" class="me-2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
