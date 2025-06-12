@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Nadal vs Novak Djokovic - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/400') center/cover no-repeat;
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .match-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .player-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .odds-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .odds-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .odds-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .odds-highlight {
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .match-info {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-row {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 10px 0;
+        }
+        
+        .stats-row:last-child {
+            border-bottom: none;
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .tournament-badge {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="tennis.html">Tennis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Match Hero Section -->
+    <section class="container mt-4">
+        <div class="match-hero">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="tournament-badge me-3">ATP Masters 1000</span>
+                        <span class="live-indicator">LIVE</span>
+                    </div>
+                    <h1 class="display-5 fw-bold mb-2">Rafael Nadal vs Novak Djokovic</h1>
+                    <p class="lead mb-0">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Roland Garros, Paris • Today, 16:30
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="fs-2 fw-bold">
+                        Set 1: 6-4<br>
+                        <small class="fs-4">Current Set: 3-2</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Match Details -->
+            <div class="col-lg-8">
+                <!-- Players Section -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="player-card">
+                            <img src="/api/placeholder/120/120" alt="Rafael Nadal" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                            <h3 class="fw-bold text-primary">Rafael Nadal</h3>
+                            <p class="text-muted mb-2">Spain • Age: 37</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">22</div>
+                                    <small class="text-muted">Grand Slams</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">#2</div>
+                                    <small class="text-muted">ATP Ranking</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">14</div>
+                                    <small class="text-muted">French Opens</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="player-card">
+                            <img src="/api/placeholder/120/120" alt="Novak Djokovic" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                            <h3 class="fw-bold text-primary">Novak Djokovic</h3>
+                            <p class="text-muted mb-2">Serbia • Age: 36</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">24</div>
+                                    <small class="text-muted">Grand Slams</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">#1</div>
+                                    <small class="text-muted">ATP Ranking</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">3</div>
+                                    <small class="text-muted">French Opens</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Betting Odds -->
+                <div class="odds-card">
+                    <h4 class="mb-4">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Match Winner Odds
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <button class="odds-button">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Rafael Nadal</span>
+                                    <span class="odds-highlight">2.25</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="odds-button">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Novak Djokovic</span>
+                                    <span class="odds-highlight">1.65</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Markets -->
+                <div class="odds-card">
+                    <h4 class="mb-4">
+                        <i class="fas fa-list me-2"></i>
+                        Additional Markets
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center p-3 border rounded">
+                                <h6>Total Sets</h6>
+                                <button class="btn btn-outline-primary btn-sm me-2">Over 3.5 <span class="fw-bold">1.85</span></button>
+                                <button class="btn btn-outline-primary btn-sm">Under 3.5 <span class="fw-bold">1.95</span></button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center p-3 border rounded">
+                                <h6>Set 2 Winner</h6>
+                                <button class="btn btn-outline-primary btn-sm me-2">Nadal <span class="fw-bold">2.10</span></button>
+                                <button class="btn btn-outline-primary btn-sm">Djokovic <span class="fw-bold">1.75</span></button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="text-center p-3 border rounded">
+                                <h6>First Set Score</h6>
+                                <button class="btn btn-outline-primary btn-sm">6-4 Nadal <span class="fw-bold">8.50</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Match Statistics -->
+                <div class="match-info">
+                    <h4 class="mb-4">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Head-to-Head Statistics
+                    </h4>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>Total Meetings</span>
+                            <span class="fw-bold">59</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>Nadal Wins</span>
+                            <span class="fw-bold text-success">29</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>Djokovic Wins</span>
+                            <span class="fw-bold text-danger">30</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>On Clay Courts</span>
+                            <span class="fw-bold">Nadal leads 20-8</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>At French Open</span>
+                            <span class="fw-bold">Nadal leads 8-2</span>
+                        </div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="d-flex justify-content-between">
+                            <span>Last Meeting</span>
+                            <span class="fw-bold">Djokovic won (2023 French Open)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip -->
+            <div class="col-lg-4">
+                <div class="bet-slip p-3">
+                    <h5 class="border-bottom pb-2 mb-3">
+                        <i class="fas fa-ticket-alt me-2"></i>
+                        Bet Slip
+                    </h5>
+                    <div class="selected-bet p-3 border rounded mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">Rafael Nadal to Win</span>
+                            <button class="btn btn-sm btn-outline-danger">×</button>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Odds:</span>
+                            <span class="fw-bold text-primary">2.25</span>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Stake ($)</label>
+                            <input type="number" class="form-control" value="10" min="1">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Potential Win:</span>
+                            <span class="fw-bold text-success">$22.50</span>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-accent btn-lg">Place Bet</button>
+                    </div>
+                </div>
+
+                <!-- Live Updates -->
+                <div class="card mt-4">
+                    <div class="card-header bg-danger text-white">
+                        <i class="fas fa-broadcast-tower me-2"></i>
+                        Live Updates
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <small class="text-muted">65:23 - Set 2</small>
+                            <p class="mb-1">Nadal holds serve. 3-2 Nadal leading.</p>
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-muted">62:15 - Set 2</small>
+                            <p class="mb-1">Djokovic wins the point with a powerful forehand.</p>
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-muted">58:42 - Set 2</small>
+                            <p class="mb-1">Break point for Nadal!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournament Info -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <i class="fas fa-trophy me-2"></i>
+                        Tournament Info
+                    </div>
+                    <div class="card-body">
+                        <h6>ATP Masters 1000 - Paris</h6>
+                        <p class="text-muted mb-2">Prize Money: $5,415,410</p>
+                        <p class="text-muted mb-2">Surface: Clay</p>
+                        <p class="text-muted mb-0">Round: Semifinals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="tennis.html" class="text-white text-decoration-none">Tennis</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Responsible Gaming</h5>
+                    <p>Bet responsibly. Gambling can be addictive. If you need help, contact:</p>
+                    <p class="mb-2"><strong>National Problem Gambling Helpline:</strong> 1-800-522-4700</p>
+                    <div class="mt-3">
+                        <img src="/api/placeholder/50/30" alt="18+" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Responsible Gaming" class="me-2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Auto-update odds simulation
+        function updateOdds() {
+            const nadalOdds = document.querySelector('.odds-highlight');
+            if (nadalOdds && nadalOdds.textContent === '2.25') {
+                // Simulate slight odds fluctuation
+                const variation = (Math.random() - 0.5) * 0.1;
+                const newOdds = (2.25 + variation).toFixed(2);
+                nadalOdds.textContent = newOdds;
+            }
+        }
+        
+        // Update odds every 30 seconds
+        setInterval(updateOdds, 30000);
+        
+        // Add bet to slip functionality
+        document.querySelectorAll('.odds-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.background = 'var(--success)';
+                setTimeout(() => {
+                    this.style.background = 'var(--primary)';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
