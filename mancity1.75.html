@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manchester City vs Chelsea - Odds 1.75 | Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --city-blue: #6cabdd;
+            --chelsea-blue: #034694;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .match-header {
+            background: linear-gradient(135deg, var(--city-blue), var(--chelsea-blue));
+            color: white;
+            padding: 40px 0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .city-card {
+            border-top: 4px solid var(--city-blue);
+        }
+        
+        .chelsea-card {
+            border-top: 4px solid var(--chelsea-blue);
+        }
+        
+        .odds-highlight {
+            background-color: var(--accent);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .city-odds {
+            background-color: var(--city-blue);
+            color: white;
+        }
+        
+        .bet-button {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .bet-button:hover {
+            background-color: #059669;
+            border-color: #059669;
+            color: white;
+        }
+        
+        .stats-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .match-info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .league-badge {
+            background: linear-gradient(45deg, #37003c, #00ff87);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="soccer.html">Soccer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Match Header -->
+    <div class="container mt-4">
+        <div class="match-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-futbol me-2"></i>
+                            <span class="league-badge me-2">Premier League</span>
+                            <span class="badge bg-warning text-dark">Tomorrow, 15:00</span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-2">Manchester City vs Chelsea</h1>
+                        <p class="lead mb-0">Etihad Stadium • Premier League Matchday 25</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="city-odds odds-highlight">
+                            Man City to Win<br>
+                            <span style="font-size: 2rem;">1.75</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Team Information -->
+            <div class="col-lg-8">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="team-card city-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/120/120" alt="Manchester City" class="rounded-circle mb-3" style="border: 3px solid var(--city-blue);">
+                                <h3 style="color: var(--city-blue);">Manchester City</h3>
+                                <p class="text-muted">England • Founded: 1880</p>
+                                <div class="city-odds odds-highlight">
+                                    Home Win: 1.75
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <strong>Position</strong><br>
+                                    <span class="text-primary">2nd</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Points</strong><br>
+                                    <span class="text-primary">56</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Goals</strong><br>
+                                    <span class="text-primary">68</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="team-card chelsea-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/120/120" alt="Chelsea" class="rounded-circle mb-3" style="border: 3px solid var(--chelsea-blue);">
+                                <h3 style="color: var(--chelsea-blue);">Chelsea</h3>
+                                <p class="text-muted">England • Founded: 1905</p>
+                                <div class="odds-highlight bg-secondary">
+                                    Away Win: 4.50
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <strong>Position</strong><br>
+                                    <span class="text-primary">6th</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Points</strong><br>
+                                    <span class="text-primary">39</span>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Goals</strong><br>
+                                    <span class="text-primary">42</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Head to Head Stats -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">Head-to-Head Statistics</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Total Meetings:</strong></td>
+                                    <td class="text-end">166</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Man City Wins:</strong></td>
+                                    <td class="text-end text-success">68</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chelsea Wins:</strong></td>
+                                    <td class="text-end text-danger">65</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Draws:</strong></td>
+                                    <td class="text-end">33</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>At Etihad:</strong></td>
+                                    <td class="text-end">City 45-20</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>This Season:</strong></td>
+                                    <td class="text-end">Chelsea 1-0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last 5 Meetings:</strong></td>
+                                    <td class="text-end">City 3-2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Goals Average:</strong></td>
+                                    <td class="text-end">2.8 per game</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Betting Markets -->
+                <div class="stats-table p-4">
+                    <h4 class="border-bottom pb-3 mb-4">All Betting Markets</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Match Result</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary">Man City <span class="float-end">1.75</span></button>
+                                    <button class="btn btn-outline-primary">Draw <span class="float-end">3.60</span></button>
+                                    <button class="btn btn-outline-primary">Chelsea <span class="float-end">4.50</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Total Goals</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Under 2.5 <span class="float-end">2.10</span></button>
+                                    <button class="btn btn-outline-primary">Over 2.5 <span class="float-end">1.75</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Both Teams to Score</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Yes <span class="float-end">1.85</span></button>
+                                    <button class="btn btn-outline-primary">No <span class="float-end">1.95</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>First Goalscorer</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Haaland <span class="float-end">3.25</span></button>
+                                    <button class="btn btn-outline-primary">Sterling <span class="float-end">5.50</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip & Match Info -->
+            <div class="col-lg-4">
+                <!-- Quick Bet -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Quick Bet - Man City to Win</h5>
+                    <div class="text-center mb-3">
+                        <div class="city-odds odds-highlight mb-3">
+                            1.75
+                        </div>
+                        <p class="text-muted">Potential return for $100 bet: <strong>$175</strong></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bet Amount ($)</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" value="100">
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn bet-button">
+                            <i class="fas fa-ticket-alt me-2"></i>
+                            Place Bet - $175 Return
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Match Information -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Match Information</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Competition:</span>
+                        <span class="fw-bold">Premier League</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Venue:</span>
+                        <span class="fw-bold">Etihad Stadium</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Date:</span>
+                        <span class="fw-bold">Tomorrow</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Kick-off:</span>
+                        <span class="fw-bold">15:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Referee:</span>
+                        <span class="fw-bold">Michael Oliver</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Weather:</span>
+                        <span class="fw-bold">Cloudy, 12°C</span>
+                    </div>
+                </div>
+
+                <!-- Recent Form -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Recent Form</h5>
+                    <div class="mb-3">
+                        <h6 style="color: var(--city-blue);">Manchester City</h6>
+                        <div class="d-flex gap-1 mb-2">
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-warning">D</span>
+                        </div>
+                        <small class="text-muted">4 wins, 1 draw in last 5</small>
+                    </div>
+                    <div>
+                        <h6 style="color: var(--chelsea-blue);">Chelsea</h6>
+                        <div class="d-flex gap-1 mb-2">
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-danger">L</span>
+                            <span class="badge bg-warning">D</span>
+                            <span class="badge bg-success">W</span>
+                            <span class="badge bg-danger">L</span>
+                        </div>
+                        <small class="text-muted">2 wins, 1 draw, 2 losses</small>
+                    </div>
+                </div>
+
+                <!-- Key Players -->
+                <div class="match-info-card p-4">
+                    <h5 class="border-bottom pb-2 mb-3">Key Players</h5>
+                    <div class="mb-3">
+                        <h6 style="color: var(--city-blue);">Manchester City</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Erling Haaland</span>
+                            <span class="badge bg-warning">27 goals</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Kevin De Bruyne</span>
+                            <span class="badge bg-info">15 assists</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h6 style="color: var(--chelsea-blue);">Chelsea</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Raheem Sterling</span>
+                            <span class="badge bg-warning">8 goals</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Enzo Fernández</span>
+                            <span class="badge bg-info">6 assists</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="soccer.html" class="text-white text-decoration-none">Soccer</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Bet Responsibly</h5>
+                    <p>Gambling can be addictive. Please play responsibly and within your means.</p>
+                    <div class="mt-3">
+                        <img src="/api/placeholder/50/30" alt="18+" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Responsible Gaming" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Premier League" class="me-2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

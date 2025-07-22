@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over 230 - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --over-color: #10b981;
+            --under-color: #ef4444;
+            --high-scoring: #059669;
+            --explosive: #dc2626;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-over {
+            background-color: var(--over-color);
+            border-color: var(--over-color);
+            color: white;
+        }
+        
+        .btn-over:hover {
+            background-color: #0da271;
+            border-color: #0da271;
+            color: white;
+        }
+        
+        .btn-under {
+            background-color: var(--under-color);
+            border-color: var(--under-color);
+            color: white;
+        }
+        
+        .btn-under:hover {
+            background-color: #dc3030;
+            border-color: #dc3030;
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .total-header {
+            background: linear-gradient(135deg, var(--high-scoring), var(--accent), var(--explosive));
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .game-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--high-scoring);
+        }
+        
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .warriors-logo {
+            background-color: #1D428A;
+            color: #FFC72C;
+        }
+        
+        .suns-logo {
+            background-color: #1D1160;
+            color: #E56020;
+        }
+        
+        .odds-card {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .odds-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .over-highlight {
+            background: linear-gradient(45deg, var(--high-scoring), var(--accent));
+            color: white;
+            border: none;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .over-highlight:hover {
+            background: linear-gradient(45deg, #047857, #d97706);
+            color: white;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px var(--high-scoring); }
+            to { box-shadow: 0 0 20px var(--high-scoring), 0 0 30px var(--high-scoring); }
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-row {
+            border-bottom: 1px solid #e9ecef;
+            padding: 8px 0;
+        }
+        
+        .stats-row:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .score-tracker {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .quarter-score {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .progress-bar-over {
+            background: linear-gradient(90deg, var(--high-scoring), var(--accent));
+            animation: progress-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes progress-glow {
+            from { box-shadow: 0 0 5px var(--high-scoring); }
+            to { box-shadow: 0 0 15px var(--high-scoring); }
+        }
+        
+        .total-counter {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ffffff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .counter-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .trend-up {
+            color: var(--high-scoring);
+        }
+        
+        .trend-down {
+            color: var(--under-color);
+        }
+        
+        .offensive-stat {
+            background-color: rgba(5, 150, 105, 0.1);
+            border-left: 4px solid var(--high-scoring);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        
+        .high-scoring-alert {
+            background: linear-gradient(45deg, rgba(5, 150, 105, 0.1), rgba(245, 158, 11, 0.1));
+            border: 2px solid var(--high-scoring);
+            border-radius: 8px;
+            padding: 15px;
+            animation: alert-pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes alert-pulse {
+            0%, 100% { border-color: var(--high-scoring); }
+            50% { border-color: var(--accent); }
+        }
+        
+        .fire-icon {
+            color: var(--explosive);
+            animation: fire-flicker 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes fire-flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="basketball.html">Basketball</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Total Points Header -->
+    <section class="total-header text-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="team-logo warriors-logo mx-auto mb-2">GSW</div>
+                    <h4 class="mb-0">Golden State Warriors</h4>
+                </div>
+                <div class="col-md-4">
+                    <h1 class="display-4 fw-bold mb-2">
+                        <i class="fas fa-fire fire-icon me-2"></i>Over 230<i class="fas fa-fire fire-icon ms-2"></i>
+                    </h1>
+                    <p class="lead mb-0">High-Scoring Showdown</p>
+                    <p class="mb-3">Tonight, 10:30 PM ET</p>
+                    <div class="total-counter">
+                        <span id="current-total">0</span>
+                    </div>
+                    <p class="counter-label">Current Total</p>
+                    <div class="mt-3">
+                        <span class="badge bg-warning text-dark fs-6">Need: 231+ points for WIN!</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-logo suns-logo mx-auto mb-2">PHX</div>
+                    <h4 class="mb-0">Phoenix Suns</h4>
+                </div>
+            </div>
+            
+            <div class="score-tracker">
+                <div class="row text-center">
+                    <div class="col-3">
+                        <h5>Q1</h5>
+                        <div class="quarter-score">
+                            <div class="row">
+                                <div class="col-6 text-end">32</div>
+                                <div class="col-6 text-start">35</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <h5>Q2</h5>
+                        <div class="quarter-score">
+                            <div class="row">
+                                <div class="col-6 text-end">38</div>
+                                <div class="col-6 text-start">34</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <h5>Q3</h5>
+                        <div class="quarter-score">
+                            <div class="row">
+                                <div class="col-6 text-end">--</div>
+                                <div class="col-6 text-start">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <h5>Q4</h5>
+                        <div class="quarter-score">
+                            <div class="row">
+                                <div class="col-6 text-end">--</div>
+                                <div class="col-6 text-start">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Game Details -->
+            <div class="col-lg-8 mb-4">
+                <!-- Main Game Card -->
+                <div class="card game-card mb-4">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-basketball-ball me-2"></i>NBA Regular Season - High-Scoring Matchup</span>
+                        <span class="live-indicator">LIVE</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row text-center mb-4">
+                            <div class="col-5">
+                                <div class="team-logo warriors-logo mx-auto mb-3">GSW</div>
+                                <h3 class="fw-bold">Golden State Warriors</h3>
+                                <h4>70</h4>
+                            </div>
+                            <div class="col-2 d-flex align-items-center justify-content-center">
+                                <div class="text-center">
+                                    <div class="h2 fw-bold text-primary">VS</div>
+                                    <small class="text-muted">Q2 1:23</small>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="team-logo suns-logo mx-auto mb-3">PHX</div>
+                                <h3 class="fw-bold">Phoenix Suns</h3>
+                                <h4>69</h4>
+                            </div>
+                        </div>
+
+                        <!-- Progress Toward Total -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Progress to 230</span>
+                                <span class="fw-bold">139 / 230 (60.4%)</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-over" role="progressbar" style="width: 60.4%" aria-valuenow="60.4" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-success mt-1"><i class="fas fa-fire me-1"></i>On pace for a high-scoring game!</small>
+                        </div>
+
+                        <!-- Betting Options -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card odds-card h-100 text-center p-3 border-success">
+                                    <h6 class="text-muted mb-2">Total Points</h6>
+                                    <button class="btn over-highlight w-100 mb-2">
+                                        <i class="fas fa-fire me-1"></i>Over 230 <span class="fw-bold">-110</span>
+                                    </button>
+                                    <button class="btn btn-outline-danger w-100">
+                                        Under 230 <span class="fw-bold">-110</span>
+                                    </button>
+                                    <div class="mt-3 text-start">
+                                        <small class="text-muted">Projected Final: <span class="fw-bold trend-up">248</span> <i class="fas fa-arrow-up trend-up"></i></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card odds-card h-100 text-center p-3">
+                                    <h6 class="text-muted mb-2">Alternative High Totals</h6>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <button class="btn btn-sm btn-outline-success flex-grow-1 me-1">
+                                            O 235.5 <span class="fw-bold">+110</span>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary flex-grow-1">
+                                            U 235.5 <span class="fw-bold">-140</span>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <button class="btn btn-sm btn-outline-success flex-grow-1 me-1">
+                                            O 240.5 <span class="fw-bold">+150</span>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary flex-grow-1">
+                                            U 240.5 <span class="fw-bold">-180</span>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-sm btn-outline-success flex-grow-1 me-1">
+                                            O 245.5 <span class="fw-bold">+200</span>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary flex-grow-1">
+                                            U 245.5 <span class="fw-bold">-250</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offensive Statistics -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Offensive Powerhouse Stats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-primary mb-3">Golden State Warriors</h6>
+                                <div class="offensive-stat">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Points Per Game:</span>
+                                        <span class="fw-bold">125.8</span>
+                                    </div>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Field Goal %:</span>
+                                    <span class="fw-bold">49.2%</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>3-Point %:</span>
+                                    <span class="fw-bold">39.1%</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>3PA Per Game:</span>
+                                    <span class="fw-bold">45.2</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Fast Break PPG:</span>
+                                    <span class="fw-bold">18.4</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Pace (Possessions):</span>
+                                    <span class="fw-bold">102.8</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Over Record:</span>
+                                    <span class="fw-bold text-success">16-7</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-warning mb-3">Phoenix Suns</h6>
+                                <div class="offensive-stat">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Points Per Game:</span>
+                                        <span class="fw-bold">122.3</span>
+                                    </div>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Field Goal %:</span>
+                                    <span class="fw-bold">47.8%</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>3-Point %:</span>
+                                    <span class="fw-bold">37.6%</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>3PA Per Game:</span>
+                                    <span class="fw-bold">41.8</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Fast Break PPG:</span>
+                                    <span class="fw-bold">16.9</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Pace (Possessions):</span>
+                                    <span class="fw-bold">101.2</span>
+                                </div>
+                                <div class="stats-row d-flex justify-content-between">
+                                    <span>Over Record:</span>
+                                    <span class="fw-bold text-success">15-8</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="high-scoring-alert mt-4">
+                            <h6 class="text-success mb-2"><i class="fas fa-fire fire-icon me-2"></i>High-Scoring Factors</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Both teams rank top 5 in offensive efficiency</li>
+                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Fast pace game (102+ possessions projected)</li>
+                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Elite 3-point shooting from both teams</li>
+                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Combined average: 248.1 points per game</li>
+                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Both teams on back-to-back over streaks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historical High-Scoring Games -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-history me-2"></i>High-Scoring History</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Score</th>
+                                        <th>Total</th>
+                                        <th>O/U Line</th>
+                                        <th>Result</th>
+                                        <th>Margin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-success">
+                                        <td>Jan 10, 2025</td>
+                                        <td>GSW 142 - PHX 138</td>
+                                        <td>280</td>
+                                        <td>232.5</td>
+                                        <td><span class="badge bg-success">OVER</span></td>
+                                        <td>+47.5</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td>Nov 15, 2024</td>
+                                        <td>PHX 135 - GSW 129</td>
+                                        <td>264</td>
+                                        <td>228.5</td>
+                                        <td><span class="badge bg-success">OVER</span></td>
+                                        <td>+35.5</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td>Mar 22, 2024</td>
+                                        <td>GSW 123 - PHX 115</td>
+                                        <td>238</td>
+                                        <td>225.5</td>
+                                        <td><span class="badge bg-success">OVER</span></td>
+                                        <td>+12.5</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td>Jan 8, 2024</td>
+                                        <td>PHX 130 - GSW 119</td>
+                                        <td>249</td>
+                                        <td>230.5</td>
+                                        <td><span class="badge bg-success">OVER</span></td>
+                                        <td>+18.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Oct 25, 2023</td>
+                                        <td>GSW 108 - PHX 104</td>
+                                        <td>212</td>
+                                        <td>227.5</td>
+                                        <td><span class="badge bg-danger">UNDER</span></td>
+                                        <td>-15.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <i class="fas fa-fire fire-icon me-2"></i>
+                            <strong>Over Trend:</strong> 4 of the last 5 matchups have gone OVER, with an average total of 248.6 points!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip & Info -->
+            <div class="col-lg-4">
+                <div class="bet-slip p-3 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">
+                        <i class="fas fa-ticket-alt me-2"></i>Bet Slip
+                    </h5>
+                    <div id="selected-bet" class="d-none">
+                        <div class="card mb-3">
+                            <div class="card-body p-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <strong><i class="fas fa-fire me-1"></i>Over 230</strong>
+                                        <br>
+                                        <small class="text-muted">Total Points</small>
+                                    </div>
+                                    <span class="badge bg-primary">-110</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Stake ($)</label>
+                                    <input type="number" class="form-control form-control-sm" value="10" min="1">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Potential Win:</span>
+                                    <span class="fw-bold text-success">$19.09</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="empty-slip" class="empty-slip text-center p-4">
+                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your bet slip is empty</p>
+                        <p class="small text-muted">Click on Over 230 to add it</p>
+                    </div>
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-over" id="place-bet-btn" disabled>Place Bet</button>
+                    </div>
+                </div>
+
+                <!-- Betting Tips -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>High-Scoring Insights</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-success">
+                            <strong>Over 230:</strong> The total score needs to be 231 points or more for this bet to win.
+                        </div>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><i class="fas fa-fire fire-icon me-2"></i>Both teams average 248+ combined PPG</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Current pace: 248 projected points</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Elite 3-point shooting matchup</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fast-paced, up-tempo game style</li>
+                            <li class="mb-2"><i class="fas fa-info text-primary me-2"></i>Both teams on offensive hot streaks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Live Scoring Pace -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Explosive Pace</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span>Current Pace:</span>
+                            <span class="fw-bold trend-up">248 points <i class="fas fa-rocket ms-1"></i></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span>Points Per Quarter (Avg):</span>
+                            <span class="fw-bold">62</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span>3-Pointers Made:</span>
+                            <span class="fw-bold">18</span>
+                        </div>
+                        <div class="alert alert-warning mt-3 mb-0">
+                            <i class="fas fa-fire fire-icon me-2"></i>
+                            <strong>Pace Alert:</strong> This game is on fire! Well above the 230 total.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="card">
+                    <div class="card-header">
+                        Quick Links
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Live NBA Scores
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                High-Scoring Games
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Player Scoring Props
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                3-Point Markets
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <small class="text-muted">Secure payments accepted</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Simple bet slip functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const overBtn = document.querySelector('.over-highlight');
+            const emptySlip = document.getElementById('empty-slip');
+            const selectedBet = document.getElementById('selected-bet');
+            const placeBetBtn = document.getElementById('place-bet-btn');
+            
+            // Simulate live score updates (high-scoring pace)
+            let currentTotal = 139;
+            const totalCounter = document.getElementById('current-total');
+            totalCounter.textContent = currentTotal;
+            
+            // Update score every few seconds (faster for high-scoring game)
+            setInterval(function() {
+                // Random score increase between 2-5 points (higher for over theme)
+                const increase = Math.floor(Math.random() * 4) + 2;
+                currentTotal += increase;
+                totalCounter.textContent = currentTotal;
+                
+                // Update progress bar
+                const progressPercent = (currentTotal / 230) * 100;
+                document.querySelector('.progress-bar').style.width = Math.min(progressPercent, 100) + '%';
+                document.querySelector('.progress-bar').setAttribute('aria-valuenow', Math.min(progressPercent, 100));
+                
+                // Update progress text
+                document.querySelector('.d-flex.justify-content-between.align-items-center.mb-2 .fw-bold').textContent = 
+                    `${currentTotal} / 230 (${Math.min(progressPercent, 100).toFixed(1)}%)`;
+                
+                // Update projected final
+                const projected = Math.round((currentTotal / 2) * 4); // Extrapolate from half-time
+                document.querySelector('.trend-up').textContent = projected;
+            }, 4000); // Faster updates for high-scoring game
+            
+            overBtn.addEventListener('click', function() {
+                emptySlip.classList.add('d-none');
+                selectedBet.classList.remove('d-none');
+                placeBetBtn.disabled = false;
+                
+                // Add visual feedback
+                this.innerHTML = '<i class="fas fa-fire me-1"></i>Over 230 <span class="fw-bold">-110</span> ✓';
+                this.classList.add('btn-success');
+                this.classList.remove('over-highlight');
+            });
+            
+            placeBetBtn.addEventListener('click', function() {
+                alert('Bet placed successfully! Over 230 for $10 - Let\'s go for a high-scoring game!');
+            });
+        });
+    </script>
+</body>
+</html>

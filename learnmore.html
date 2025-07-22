@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .info-section {
+            padding: 80px 0;
+        }
+        
+        .info-section:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 4px solid var(--primary);
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .faq-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .faq-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-body {
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .testimonial-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-rating {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2"><a href="login.html" style="text-decoration: none; color: inherit">Log In</a></button>
+                    <button class="btn btn-accent"><a href="signup.html" style="text-decoration: none; color: inherit">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">About Tess Betting</h1>
+            <p class="lead mb-0">Discover why we're the preferred choice for sports betting enthusiasts worldwide</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="info-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="mb-4">Welcome to the Future of Sports Betting</h2>
+                    <p class="lead text-primary mb-4">Tess Betting is revolutionizing the online sports betting industry with cutting-edge technology and unmatched user experience.</p>
+                    <p>Founded in 2020, Tess Betting has quickly established itself as a leader in the online sports betting market. Our platform offers a comprehensive range of sports markets, competitive odds, and innovative features designed to enhance your betting experience.</p>
+                    <p>Whether you're a seasoned bettor or new to the world of sports betting, our user-friendly platform makes it easy to place bets on your favorite sports and events from anywhere, at any time.</p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="bg-light p-2 rounded me-3">
+                            <i class="fas fa-users fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">1M+</h5>
+                            <p class="mb-0 text-muted">Active Users</p>
+                        </div>
+                        <div class="ms-4 bg-light p-2 rounded me-3">
+                            <i class="fas fa-globe fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">50+</h5>
+                            <p class="mb-0 text-muted">Countries</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/api/placeholder/600/400" alt="Tess Betting Platform" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services Section -->
+    <section class="info-section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">Our Comprehensive Services</h2>
+                <p class="lead text-muted">Everything you need for an exceptional betting experience</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="info-icon mb-4">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <h4>Sports Betting</h4>
+                            <p class="text-muted">Access to over 30 different sports with thousands of events and markets. From football and basketball to tennis and golf, we've got you covered.</p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Pre-match betting</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Live in-play betting</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Outright markets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="info-icon mb-4">
+                                <i class="fas fa-dice"></i>
+                            </div>
+                            <h4>Casino Games</h4>
+                            <p class="text-muted">Enjoy a wide selection of casino games from top providers. Experience the thrill of our live casino with professional dealers.</p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Slots & Jackpots</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Table Games</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Live Casino</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="info-icon mb-4">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Mobile Betting</h4>
+                            <p class="text-muted">Bet on the go with our mobile-optimized website and dedicated apps for iOS and Android devices.</p>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Responsive design</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Native mobile apps</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Push notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="info-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <h2 class="mb-4">How Tess Betting Works</h2>
+                    <p class="lead">Getting started with Tess Betting is quick and easy. Follow these simple steps to begin your betting journey:</p>
+                    <div class="timeline mt-5">
+                        <div class="timeline-item">
+                            <h5>Create Your Account</h5>
+                            <p>Sign up for a free account in just a few minutes. All you need is your basic information and a valid email address.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Make Your First Deposit</h5>
+                            <p>Fund your account using one of our many secure payment methods. We accept credit/debit cards, e-wallets, and bank transfers.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Claim Your Welcome Bonus</h5>
+                            <p>New customers can claim our generous welcome bonus of 100% match up to $500 on their first deposit.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Place Your Bets</h5>
+                            <p>Browse our extensive range of sports and events, find the markets you're interested in, and place your bets with just a few clicks.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Withdraw Your Winnings</h5>
+                            <p>Easily withdraw your winnings to your preferred payment method. Our fast processing ensures you get your money quickly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <img src="/api/placeholder/600/800" alt="How Tess Betting Works" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Responsible Gaming Section -->
+    <section class="info-section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">Responsible Gaming</h2>
+                <p class="lead text-muted">We're committed to promoting responsible gambling</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card feature-card">
+                        <div class="card-body p-4">
+                            <p>At Tess Betting, we believe that betting should be an enjoyable form of entertainment. We are committed to promoting responsible gambling and providing our customers with the tools and resources they need to stay in control of their betting activities.</p>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-shield-alt text-primary me-2"></i> Our Commitment</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Age verification</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Self-exclusion options</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Deposit limits</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Reality checks</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-hand-holding-heart text-primary me-2"></i> Support Resources</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Self-assessment tools</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dedicated support team</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Links to support organizations</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Educational resources</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="alert alert-primary mt-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-info-circle fa-2x"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="alert-heading">Need Help?</h5>
+                                        <p class="mb-0">If you or someone you know is struggling with gambling-related issues, please contact our support team or visit our Responsible Gaming page for more information and resources.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="info-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">Frequently Asked Questions</h2>
+                <p class="lead text-muted">Find answers to common questions about Tess Betting</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <h5 class="mb-0">How do I create an account?</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="faq1" class="collapse show faq-body">
+                            <p>Creating an account is simple. Click on the "Sign Up" button at the top of the page, fill in your personal details, and submit the registration form. Once your account is verified, you can make your first deposit and start betting.</p>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <h5 class="mb-0">What payment methods do you accept?</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="faq2" class="collapse faq-body">
+                            <p>We accept a wide range of payment methods, including:</p>
+                            <ul>
+                                <li>Credit/debit cards (Visa, Mastercard)</li>
+                                <li>E-wallets (PayPal, Skrill, Neteller)</li>
+                                <li>Bank transfers</li>
+                                <li>Prepaid cards</li>
+                                <li>Cryptocurrencies (Bitcoin, Ethereum)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            <h5 class="mb-0">How do I claim the welcome bonus?</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="faq3" class="collapse faq-body">
+                            <p>The welcome bonus is automatically applied to your first deposit. Simply create an account, make a deposit of at least $20, and the bonus will be credited to your account. Please note that wagering requirements apply before you can withdraw the bonus funds.</p>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            <h5 class="mb-0">How long do withdrawals take?</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="faq4" class="collapse faq-body">
+                            <p>Withdrawal times vary depending on the payment method:</p>
+                            <ul>
+                                <li>E-wallets: 24 hours</li>
+                                <li>Credit/debit cards: 2-5 business days</li>
+                                <li>Bank transfers: 3-7 business days</li>
+                                <li>Cryptocurrencies: Up to 24 hours</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            <h5 class="mb-0">Is Tess Betting legal and licensed?</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="faq5" class="collapse faq-body">
+                            <p>Yes, Tess Betting is fully licensed and regulated by the Malta Gaming Authority and the UK Gambling Commission. We operate in full compliance with all applicable laws and regulations in the jurisdictions where we offer our services.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="info-section bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">What Our Customers Say</h2>
+                <p class="lead text-muted">Don't just take our word for it</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="John D." class="testimonial-avatar">
+                        <h5>John D.</h5>
+                        <p class="text-muted mb-3">Football Enthusiast</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Tess Betting offers the best odds for football matches. The live betting feature is fantastic, and the cash out option has saved me many times!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="Sarah M." class="testimonial-avatar">
+                        <h5>Sarah M.</h5>
+                        <p class="text-muted mb-3">Tennis Fan</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"I've been using Tess Betting for over a year now, and I'm impressed with their tennis coverage. The customer service is exceptional, and withdrawals are processed quickly."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="Michael R." class="testimonial-avatar">
+                        <h5>Michael R.</h5>
+                        <p class="text-muted mb-3">Basketball Enthusiast</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"The mobile app is fantastic! I can place bets on NBA games from anywhere. The live streaming feature is a game-changer, and the odds are very competitive."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Ready to Join Tess Betting?</h2>
+            <p class="lead mb-5">Sign up today and claim your 100% welcome bonus up to $500</p>
+            <a href="signupnow.html" class="btn btn-accent btn-lg px-5 me-3">Sign Up Now</a>
+            <a href="index.html" class="btn btn-outline-light btn-lg px-5">Back to Home</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="promotions.html" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

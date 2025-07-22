@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Bonus - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .claim-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 30px;
+        }
+        
+        .claim-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.25rem rgba(14, 165, 233, 0.25);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .bonus-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .bonus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bonus-card.selected {
+            border-color: var(--accent);
+        }
+        
+        .bonus-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .bonus-body {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .bonus-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .steps-container {
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .step {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: -60px;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary);
+        }
+        
+        .terms-section {
+            background-color: var(--light);
+            padding: 40px 0;
+        }
+        
+        .terms-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2"><a href="login.html" style="text-decoration: none; color: inherit">Log In</a></button>
+                    <button class="btn btn-accent"><a href="signup.html" style="text-decoration: none; color: inherit">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Claim Your Welcome Bonus</h1>
+            <p class="lead mb-0">Get up to $500 in bonus funds to start your betting journey</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="claim-card">
+                        <div class="claim-header">
+                            <h2 class="mb-2"><i class="fas fa-gift me-2"></i> Welcome Bonus: 100% Match</h2>
+                            <p class="mb-0">New customers only. Min deposit $20. Wagering requirements apply.</p>
+                        </div>
+                        <div class="p-4 p-md-5">
+                            <div class="alert alert-primary d-flex mb-4">
+                                <div class="me-3">
+                                    <i class="fas fa-info-circle fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5 class="alert-heading">Already have an account?</h5>
+                                    <p class="mb-0">If you already have an account, please <a href="login.html" class="alert-link">log in</a> to claim your bonus. New to Tess Betting? <a href="signup.html" class="alert-link">Sign up</a> to get started.</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mb-4">Select Your Bonus Amount</h4>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <div class="bonus-card selected">
+                                        <div class="bonus-header">
+                                            <h5 class="mb-0">Starter</h5>
+                                        </div>
+                                        <div class="bonus-body">
+                                            <div class="bonus-amount">$100</div>
+                                            <p class="mb-0">Min deposit: $20</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="bonus-card">
+                                        <div class="bonus-header">
+                                            <h5 class="mb-0">Standard</h5>
+                                        </div>
+                                        <div class="bonus-body">
+                                            <div class="bonus-amount">$250</div>
+                                            <p class="mb-0">Min deposit: $50</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="bonus-card">
+                                        <div class="bonus-header">
+                                            <h5 class="mb-0">Premium</h5>
+                                        </div>
+                                        <div class="bonus-body">
+                                            <div class="bonus-amount">$500</div>
+                                            <p class="mb-0">Min deposit: $100</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mb-4">Payment Method</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="paymentMethod" class="form-label">Select Payment Method</label>
+                                    <select class="form-select" id="paymentMethod" required>
+                                        <option value="" selected disabled>Choose a payment method</option>
+                                        <option value="card">Credit/Debit Card</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="skrill">Skrill</option>
+                                        <option value="neteller">Neteller</option>
+                                        <option value="bank">Bank Transfer</option>
+                                        <option value="crypto">Cryptocurrency</option>
+                                    </select>
+                                </div>
+                                
+                                <div id="cardDetails">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <label for="cardNumber" class="form-label">Card Number</label>
+                                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cardName" class="form-label">Name on Card</label>
+                                            <input type="text" class="form-control" id="cardName" placeholder="John Doe">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <label for="expiryDate" class="form-label">Expiry Date</label>
+                                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">Deposit Amount ($)</label>
+                                    <input type="number" class="form-control" id="amount" min="20" value="20" required>
+                                    <div class="form-text">Minimum deposit: $20</div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                        <label class="form-check-label" for="termsCheck">
+                                            I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a> and <a href="#" class="text-decoration-none">Bonus Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-accent btn-lg">Deposit & Claim Bonus</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">How to Claim Your Bonus</h2>
+                <p class="lead text-muted">Follow these simple steps to claim your welcome bonus</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Create an Account</h4>
+                                <p class="mb-0">Sign up for a new Tess Betting account. If you already have an account, log in to proceed.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Select Your Bonus</h4>
+                                <p class="mb-0">Choose the bonus amount that suits your betting style. The higher your deposit, the bigger your bonus.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Make a Deposit</h4>
+                                <p class="mb-0">Deposit funds using your preferred payment method. Remember, the minimum deposit is $20.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Receive Your Bonus</h4>
+                                <p class="mb-0">Your bonus will be credited to your account immediately after your deposit is processed.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Start Betting</h4>
+                                <p class="mb-0">Use your bonus funds to bet on your favorite sports and events. Good luck!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms and Conditions Section -->
+    <section class="terms-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3">Bonus Terms & Conditions</h2>
+                <p class="lead text-muted">Please read these terms carefully before claiming your bonus</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="terms-card p-4">
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i> Eligibility</h5>
+                            <ul>
+                                <li>This offer is available to new customers only.</li>
+                                <li>You must be 18 years or older to participate.</li>
+                                <li>Only one welcome bonus per person, household, IP address, or device.</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i> Bonus Details</h5>
+                            <ul>
+                                <li>100% match on your first deposit up to $500.</li>
+                                <li>Minimum deposit of $20 required to qualify.</li>
+                                <li>Bonus funds will be credited to your account immediately after your deposit is processed.</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i> Wagering Requirements</h5>
+                            <ul>
+                                <li>The bonus amount must be wagered 10 times before withdrawal.</li>
+                                <li>Only bets with odds of 1.50 or higher count towards the wagering requirement.</li>
+                                <li>Wagering requirements must be met within 30 days of receiving the bonus.</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i> Withdrawal Restrictions</h5>
+                            <ul>
+                                <li>You cannot withdraw the bonus funds until the wagering requirements are met.</li>
+                                <li>The maximum withdrawal amount from bonus funds is $5,000.</li>
+                                <li>Tess Betting reserves the right to withhold any withdrawal if there is evidence of bonus abuse.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5><i class="fas fa-check-circle text-primary me-2"></i> General Terms</h5>
+                            <ul>
+                                <li>Tess Betting reserves the right to modify or cancel this promotion at any time.</li>
+                                <li>All general Tess Betting terms and conditions apply.</li>
+                                <li>If you have any questions about this promotion, please contact our customer support team.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="promotions.html" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Toggle bonus card selection
+        document.querySelectorAll('.bonus-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove selected class from all cards
+                document.querySelectorAll('.bonus-card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked card
+                this.classList.add('selected');
+                
+                // Update minimum deposit amount based on selection
+                const bonusAmount = this.querySelector('.bonus-amount').textContent;
+                let minDeposit = 20;
+                
+                if (bonusAmount === '$250') {
+                    minDeposit = 50;
+                } else if (bonusAmount === '$500') {
+                    minDeposit = 100;
+                }
+                
+                // Update deposit input
+                const amountInput = document.getElementById('amount');
+                amountInput.min = minDeposit;
+                amountInput.value = minDeposit;
+                amountInput.nextElementSibling.textContent = `Minimum deposit: $${minDeposit}`;
+            });
+        });
+        
+        // Show/hide payment method details
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const cardDetails = document.getElementById('cardDetails');
+            if (this.value === 'card') {
+                cardDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tess Betting - Golf Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .match-card {
+            border-left: 4px solid var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .odds {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .promotion-banner {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tournament-card {
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .player-row {
+            transition: all 0.2s ease;
+        }
+
+        .player-row:hover {
+            background-color: rgba(14, 165, 233, 0.05);
+        }
+
+        .course-info {
+            background-color: rgba(30, 58, 138, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2"><a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a></button>
+                    <button class="btn btn-accent"><a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Golf Betting</h1>
+            <p class="lead mb-5">Bet on major tournaments, player matchups, and live in-play markets with the best golf odds</p>
+            <button class="btn btn-accent btn-lg px-5 me-3"><a href="signupnow.html" target="_blank" style="text-decoration: none; color: inherit">Place Your First Bet</a></button>
+            <button class="btn btn-outline-light btn-lg px-5"><a href="learnmore.html" target="_blank" style="text-decoration: none; color: inherit">Golf Betting Guide</a></button>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="container mt-5">
+        <div class="promotion-banner">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3>Golf Special: Free Bet up to $50 on Major Tournaments</h3>
+                    <p class="mb-0">New and existing customers. Min odds 1.5. Terms apply.</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-accent"><a href="claimnow.html" target="_blank" style="text-decoration: none; color: inherit">Claim Now</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Golf Navigation -->
+            <div class="col-lg-3 mb-4">
+                <div class="list-group">
+                    <div class="list-group-item bg-primary text-white">
+                        <i class="fas fa-golf-ball me-2"></i> Golf Tournaments
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active">
+                        The Masters <span class="badge bg-accent rounded-pill">Live</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        PGA Championship <span class="badge bg-primary rounded-pill">Soon</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        U.S. Open <span class="badge bg-primary rounded-pill">Soon</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        The Open Championship <span class="badge bg-primary rounded-pill">Soon</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Ryder Cup <span class="badge bg-primary rounded-pill">12</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        FedEx Cup <span class="badge bg-primary rounded-pill">18</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        European Tour <span class="badge bg-primary rounded-pill">24</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        LPGA Tour <span class="badge bg-primary rounded-pill">15</span>
+                    </a>
+                </div>
+
+                <div class="stats-card mt-4 p-3">
+                    <h5 class="border-bottom pb-2">Tournament Info</h5>
+                    <div class="course-info mt-3">
+                        <h6 class="mb-2">Augusta National Golf Club</h6>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Par:</span>
+                            <span class="fw-bold">72</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Length:</span>
+                            <span class="fw-bold">7,475 yards</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Defending Champion:</span>
+                            <span class="fw-bold">Scottie Scheffler</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Prize Fund:</span>
+                            <span class="fw-bold">$18,000,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tournament Content -->
+            <div class="col-lg-6 mb-4">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>The Masters - Current Leaderboard</span>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-light active">Outright</button>
+                            <button class="btn btn-light">Round</button>
+                            <button class="btn btn-light">Matchups</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th>Player</th>
+                                        <th>Score</th>
+                                        <th>Today</th>
+                                        <th>Odds</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="player-row">
+                                        <td>1</td>
+                                        <td><strong>Scottie Scheffler</strong></td>
+                                        <td class="text-success">-8</td>
+                                        <td>-3</td>
+                                        <td class="odds">2.25</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>2</td>
+                                        <td><strong>Rory McIlroy</strong></td>
+                                        <td class="text-success">-6</td>
+                                        <td>-4</td>
+                                        <td class="odds">3.50</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>T3</td>
+                                        <td><strong>Jon Rahm</strong></td>
+                                        <td class="text-success">-5</td>
+                                        <td>-2</td>
+                                        <td class="odds">5.00</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>T3</td>
+                                        <td><strong>Brooks Koepka</strong></td>
+                                        <td class="text-success">-5</td>
+                                        <td>-1</td>
+                                        <td class="odds">6.50</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>5</td>
+                                        <td><strong>Xander Schauffele</strong></td>
+                                        <td class="text-success">-4</td>
+                                        <td>-2</td>
+                                        <td class="odds">8.00</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>T6</td>
+                                        <td><strong>Collin Morikawa</strong></td>
+                                        <td class="text-success">-3</td>
+                                        <td>E</td>
+                                        <td class="odds">12.00</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>T6</td>
+                                        <td><strong>Justin Thomas</strong></td>
+                                        <td class="text-success">-3</td>
+                                        <td>-1</td>
+                                        <td class="odds">14.00</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                    <tr class="player-row">
+                                        <td>T8</td>
+                                        <td><strong>Tiger Woods</strong></td>
+                                        <td class="text-success">-2</td>
+                                        <td>-1</td>
+                                        <td class="odds">25.00</td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Bet</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="text-decoration-none">View Full Leaderboard</a>
+                    </div>
+                </div>
+
+                <!-- Featured Matchups -->
+                <div class="card mb-4">
+                    <div class="card-header">Featured Matchups</div>
+                    <div class="card-body p-0">
+                        <!-- Matchup 1 -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Round 3 Matchup</span>
+                                <small>Today, 14:20</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Scottie Scheffler</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Rory McIlroy</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Scheffler <span class="odds">1.85</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        McIlroy <span class="odds">1.95</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Matchup 2 -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Round 3 Matchup</span>
+                                <small>Today, 14:40</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Jon Rahm</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Brooks Koepka</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Rahm <span class="odds">1.90</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Koepka <span class="odds">1.90</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Matchup 3 -->
+                        <div class="match-card p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Round 3 Matchup</span>
+                                <small>Today, 15:00</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Tiger Woods</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Justin Thomas</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Woods <span class="odds">2.40</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Thomas <span class="odds">1.55</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Markets -->
+                <div class="card">
+                    <div class="card-header">Special Markets</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 feature-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Hole-in-One</h5>
+                                        <p class="card-text">Will there be a hole-in-one during the tournament?</p>
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <button class="btn btn-sm btn-outline-primary">Yes <span class="odds">2.75</span></button>
+                                            <button class="btn btn-sm btn-outline-primary">No <span class="odds">1.40</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 feature-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Winning Margin</h5>
+                                        <p class="card-text">Margin of victory for the tournament winner</p>
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button class="btn btn-sm btn-outline-primary">Playoff <span class="odds">4.50</span></button>
+                                            <button class="btn btn-sm btn-outline-primary">1 Shot <span class="odds">3.75</span></button>
+                                            <button class="btn btn-sm btn-outline-primary">2+ Shots <span class="odds">2.00</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip -->
+            <div class="col-lg-3">
+                <div class="bet-slip p-3">
+                    <h5 class="border-bottom pb-2 mb-3">Bet Slip</h5>
+                    <div class="empty-slip text-center p-4">
+                        <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your bet slip is empty</p>
+                        <p class="small text-muted">Click on odds to add selections</p>
+                    </div>
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-secondary" disabled>Place Bet</button>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Golf Betting Guide
+                    </div>
+                    <div class="card-body">
+                        <h6>Popular Golf Bet Types</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item px-0">
+                                <strong>Tournament Winner</strong>
+                                <p class="small text-muted mb-0">Bet on who will win the tournament</p>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <strong>Each Way</strong>
+                                <p class="small text-muted mb-0">Bet on a player to win or place (usually top 5)</p>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <strong>Top 10 Finish</strong>
+                                <p class="small text-muted mb-0">Bet on a player to finish in the top 10</p>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <strong>Head-to-Head Matchups</strong>
+                                <p class="small text-muted mb-0">Bet on which player will perform better</p>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Full Betting Guide</a>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Quick Links
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                My Bets
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Deposit Funds
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Live Streaming
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Help & Support
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Tournaments Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Upcoming Golf Tournaments</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center feature-card">
+                        <img src="/api/placeholder/400/200" class="card-img-top" alt="PGA Championship">
+                        <div class="card-body">
+                            <h4>PGA Championship</h4>
+                            <p class="text-muted">May 16-19, 2025</p>
+                            <p>Valhalla Golf Club, Louisville, Kentucky</p>
+                            <button class="btn btn-primary">View Markets</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center feature-card">
+                        <img src="/api/placeholder/400/200" class="card-img-top" alt="U.S. Open">
+                        <div class="card-body">
+                            <h4>U.S. Open</h4>
+                            <p class="text-muted">June 12-15, 2025</p>
+                            <p>Oakmont Country Club, Pennsylvania</p>
+                            <button class="btn btn-primary">View Markets</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center feature-card">
+                        <img src="/api/placeholder/400/200" class="card-img-top" alt="The Open Championship">
+                        <div class="card-body">
+                            <h4>The Open Championship</h4>
+                            <p class="text-muted">July 17-20, 2025</p>
+                            <p>Royal Portrush, Northern Ireland</p>
+                            <button class="btn btn-primary">View Markets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

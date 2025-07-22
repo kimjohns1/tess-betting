@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bet Slip - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            border-color: var(--danger);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .bet-slip-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .bet-item {
+            border-left: 4px solid var(--primary);
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .bet-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .odds-display {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .stake-input {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        
+        .stake-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.25);
+        }
+        
+        .potential-win {
+            background: linear-gradient(to right, var(--success), #059669);
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .bet-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .quick-stake {
+            background-color: #e5e7eb;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-stake:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quick-stake.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .remove-bet {
+            color: var(--danger);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .remove-bet:hover {
+            color: #dc2626;
+            transform: scale(1.1);
+        }
+        
+        .bet-type-badge {
+            background-color: var(--secondary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">
+                        <a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a>
+                    </button>
+                    <button class="btn btn-accent">
+                        <a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Bet Slip -->
+            <div class="col-lg-8">
+                <div class="bet-slip-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3><i class="fas fa-ticket-alt me-2"></i>Your Bet Slip</h3>
+                        <button class="btn btn-outline-danger btn-sm" onclick="clearAllBets()">
+                            <i class="fas fa-trash me-1"></i>Clear All
+                        </button>
+                    </div>
+
+                    <!-- Bet Items -->
+                    <div class="bet-items">
+                        <!-- Bet Item 1 -->
+                        <div class="bet-item p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="live-indicator me-2">LIVE</span>
+                                        <span class="bet-type-badge me-2">Match Winner</span>
+                                        <small class="text-muted">Football</small>
+                                    </div>
+                                    <h6 class="mb-1">Arsenal vs Liverpool</h6>
+                                    <p class="mb-0 text-muted">Arsenal to Win</p>
+                                </div>
+                                <div class="text-end">
+                                    <div class="odds-display">2.10</div>
+                                    <i class="fas fa-times remove-bet" onclick="removeBet(1)"></i>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <label class="form-label small">Stake</label>
+                                    <input type="number" class="form-control stake-input" placeholder="0.00" value="25" onchange="calculateWinnings()">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">Potential Win</label>
+                                    <div class="fw-bold text-success">$52.50</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bet Item 2 -->
+                        <div class="bet-item p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="bet-type-badge me-2">Moneyline</span>
+                                        <small class="text-muted">Basketball - NBA</small>
+                                    </div>
+                                    <h6 class="mb-1">LA Lakers vs Boston Celtics</h6>
+                                    <p class="mb-0 text-muted">LA Lakers to Win</p>
+                                </div>
+                                <div class="text-end">
+                                    <div class="odds-display">1.85</div>
+                                    <i class="fas fa-times remove-bet" onclick="removeBet(2)"></i>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <label class="form-label small">Stake</label>
+                                    <input type="number" class="form-control stake-input" placeholder="0.00" value="50" onchange="calculateWinnings()">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">Potential Win</label>
+                                    <div class="fw-bold text-success">$92.50</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bet Item 3 -->
+                        <div class="bet-item p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="bet-type-badge me-2">Match Winner</span>
+                                        <small class="text-muted">Tennis - ATP</small>
+                                    </div>
+                                    <h6 class="mb-1">Rafael Nadal vs Novak Djokovic</h6>
+                                    <p class="mb-0 text-muted">Novak Djokovic to Win</p>
+                                </div>
+                                <div class="text-end">
+                                    <div class="odds-display">1.65</div>
+                                    <i class="fas fa-times remove-bet" onclick="removeBet(3)"></i>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <label class="form-label small">Stake</label>
+                                    <input type="number" class="form-control stake-input" placeholder="0.00" value="30" onchange="calculateWinnings()">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">Potential Win</label>
+                                    <div class="fw-bold text-success">$49.50</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stakes -->
+                    <div class="mt-4">
+                        <h6 class="mb-3">Quick Stakes</h6>
+                        <div class="d-flex flex-wrap">
+                            <button class="quick-stake" onclick="setQuickStake(10)">$10</button>
+                            <button class="quick-stake" onclick="setQuickStake(25)">$25</button>
+                            <button class="quick-stake active" onclick="setQuickStake(50)">$50</button>
+                            <button class="quick-stake" onclick="setQuickStake(100)">$100</button>
+                            <button class="quick-stake" onclick="setQuickStake(250)">$250</button>
+                            <button class="quick-stake" onclick="setQuickStake(500)">$500</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Summary -->
+            <div class="col-lg-4">
+                <div class="bet-slip-card p-4 sticky-top" style="top: 1rem;">
+                    <h5 class="mb-4">Bet Summary</h5>
+                    
+                    <div class="bet-summary">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Number of Bets:</span>
+                            <span class="fw-bold">3</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Total Stake:</span>
+                            <span class="fw-bold">$105.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Total Odds:</span>
+                            <span class="fw-bold">6.41</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">Potential Payout:</span>
+                            <span class="fw-bold text-success">$194.50</span>
+                        </div>
+                    </div>
+
+                    <div class="potential-win mb-4">
+                        <h6 class="mb-1">Total Potential Win</h6>
+                        <h3 class="mb-0">$194.50</h3>
+                        <small>Profit: $89.50</small>
+                    </div>
+
+                    <!-- Bet Type Options -->
+                    <div class="mb-4">
+                        <h6 class="mb-3">Bet Type</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="betType" id="single" checked>
+                            <label class="form-check-label" for="single">
+                                Single Bets
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="betType" id="accumulator">
+                            <label class="form-check-label" for="accumulator">
+                                Accumulator (Higher Risk, Higher Reward)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Place Bet Button -->
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-lg" onclick="placeBet(placeBet)">
+                            <i class="fas fa-check me-2"></i>Place Bet
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="saveBetSlip(saveBetSlip)">
+                            <i class="fas fa-save me-2"></i>Save Bet Slip
+                        </button>
+                    </div>
+
+                    <!-- Account Balance -->
+                    <div class="mt-4 p-3 bg-light rounded">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Account Balance:</span>
+                            <span class="fw-bold text-success">$1,250.00</span>
+                        </div>
+                        <small class="text-muted">Available for betting</small>
+                    </div>
+                </div>
+
+                <!-- Recent Bets -->
+                <div class="bet-slip-card p-4 mt-4">
+                    <h6 class="mb-3">Recent Bets</h6>
+                    <div class="small">
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <div>
+                                <div class="fw-bold">Manchester City vs Chelsea</div>
+                                <div class="text-muted">Home Win - $25.00</div>
+                            </div>
+                            <span class="badge bg-success">Won</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <div>
+                                <div class="fw-bold">Warriors vs Nets</div>
+                                <div class="text-muted">Over 220.5 - $50.00</div>
+                            </div>
+                            <span class="badge bg-danger">Lost</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center p-2 bg-light rounded">
+                            <div>
+                                <div class="fw-bold">Federer vs Murray</div>
+                                <div class="text-muted">Federer Win - $30.00</div>
+                            </div>
+                            <span class="badge bg-warning">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="helpcenter.html" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function removeBet(betId) {
+            // Remove bet functionality
+            console.log('Removing bet:', betId);
+            // In a real application, this would remove the bet from the slip
+        }
+
+        function clearAllBets() {
+            if (confirm('Are you sure you want to clear all bets?')) {
+                console.log('Clearing all bets');
+                // In a real application, this would clear the entire bet slip
+            }
+        }
+
+        function calculateWinnings() {
+            // Calculate potential winnings based on stakes and odds
+            console.log('Calculating winnings');
+            // In a real application, this would recalculate all potential winnings
+        }
+
+        function setQuickStake(amount) {
+            // Set quick stake amount for all bets
+            document.querySelectorAll('.stake-input').forEach(input => {
+                input.value = amount;
+            });
+            
+            // Update active quick stake button
+            document.querySelectorAll('.quick-stake').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            calculateWinnings();
+        }
+
+        function placeBet() {
+            // Place bet functionality
+            if (confirm('Are you sure you want to place this bet?')) {
+                alert('Bet placed successfully!');
+                console.log('Placing bet');
+                // In a real application, this would submit the bet to the server
+            }
+        }
+
+        function saveBetSlip() {
+            // Save bet slip functionality
+            alert('Bet slip saved!');
+            console.log('Saving bet slip');
+            // In a real application, this would save the bet slip for later
+        }
+    </script>
+</body>
+</html>

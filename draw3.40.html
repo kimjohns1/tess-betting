@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal vs Liverpool Draw - Odds 3.40 | Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --draw-color: #8b5cf6;
+            --draw-accent: #a855f7;
+            --arsenal-red: #dc143c;
+            --liverpool-red: #c8102e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .match-header {
+            background: linear-gradient(135deg, var(--draw-color), var(--draw-accent));
+            color: white;
+            padding: 40px 0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .arsenal-card {
+            border-top: 4px solid var(--arsenal-red);
+        }
+        
+        .liverpool-card {
+            border-top: 4px solid var(--liverpool-red);
+        }
+        
+        .odds-highlight {
+            background-color: var(--draw-color);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .draw-banner {
+            background: linear-gradient(135deg, var(--draw-color), var(--draw-accent));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .bet-button {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .bet-button:hover {
+            background-color: #059669;
+            border-color: #059669;
+            color: white;
+        }
+        
+        .stats-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .match-info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--draw-color);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .balance-meter {
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .balance-fill-arsenal {
+            height: 100%;
+            background: var(--arsenal-red);
+            width: 50%;
+            position: absolute;
+            left: 0;
+        }
+        
+        .balance-fill-liverpool {
+            height: 100%;
+            background: var(--liverpool-red);
+            width: 50%;
+            position: absolute;
+            right: 0;
+        }
+        
+        .draw-probability {
+            background: linear-gradient(135deg, var(--draw-color), var(--draw-accent));
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .probability-bar {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+        
+        .probability-fill {
+            background-color: white;
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .draw-factors {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--draw-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="soccer.html">Soccer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Match Header -->
+    <div class="container mt-4">
+        <div class="match-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="live-indicator me-2">LIVE</span>
+                            <i class="fas fa-futbol me-2"></i>
+                            <span class="badge bg-light text-dark me-2">Premier League</span>
+                            <span class="badge bg-warning text-dark">65:23</span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-2">Arsenal vs Liverpool</h1>
+                        <p class="lead mb-0">Emirates Stadium • Draw Betting Market</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="odds-highlight">
+                            Draw Result<br>
+                            <span style="font-size: 2rem;">3.40</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Draw Analysis Banner -->
+    <div class="container">
+        <div class="draw-banner">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3><i class="fas fa-handshake me-2"></i>Perfect Draw Scenario Developing!</h3>
+                    <p class="mb-0">With Arsenal leading 2-1 and Liverpool pushing for an equalizer, this match has all the ingredients for a dramatic draw finish.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="display-6 fw-bold">3.40</div>
+                    <small>Excellent Value for Draw</small>
+                    <div class="mt-2">
+                        <small>Match Balance</small>
+                        <div class="balance-meter">
+                            <div class="balance-fill-arsenal"></div>
+                            <div class="balance-fill-liverpool"></div>
+                        </div>
+                        <small>Evenly Matched</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Draw Analysis -->
+            <div class="col-lg-8">
+                <!-- Draw Probability Analysis -->
+                <div class="draw-probability mb-4">
+                    <h4 class="mb-4"><i class="fas fa-chart-pie me-2"></i>Draw Probability Analysis</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Implied Probability</h6>
+                            <div class="probability-bar mb-2">
+                                <div class="probability-fill" style="width: 29.4%"></div>
+                            </div>
+                            <small>29.4% chance based on 3.40 odds</small>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Live Match Dynamics</h6>
+                            <div class="probability-bar mb-2">
+                                <div class="probability-fill" style="width: 35%"></div>
+                            </div>
+                            <small>35% chance based on current flow</small>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Key Draw Factors in Play:</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small><i class="fas fa-check me-2"></i>Liverpool desperately seeking equalizer</small><br>
+                                <small><i class="fas fa-check me-2"></i>Arsenal defending narrow lead</small>
+                            </div>
+                            <div class="col-md-6">
+                                <small><i class="fas fa-check me-2"></i>Both teams tired in final third</small><br>
+                                <small><i class="fas fa-check me-2"></i>Big match pressure affecting finishing</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Comparison for Draw -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="team-card arsenal-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/100/100" alt="Arsenal" class="rounded-circle mb-3">
+                                <h4 style="color: var(--arsenal-red);">Arsenal</h4>
+                                <p class="text-muted">Home Team • Leading 2-1</p>
+                                <div class="odds-highlight" style="background-color: var(--arsenal-red);">
+                                    Home Win: 2.10
+                                </div>
+                            </div>
+                            <div class="row text-center mt-3">
+                                <div class="col-6">
+                                    <strong>Draw Tendency</strong><br>
+                                    <span class="text-primary">High</span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Defensive Mode</strong><br>
+                                    <span class="text-primary">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="team-card liverpool-card p-4 h-100">
+                            <div class="text-center mb-3">
+                                <img src="/api/placeholder/100/100" alt="Liverpool" class="rounded-circle mb-3">
+                                <h4 style="color: var(--liverpool-red);">Liverpool</h4>
+                                <p class="text-muted">Away Team • Chasing Game</p>
+                                <div class="odds-highlight" style="background-color: var(--liverpool-red);">
+                                    Away Win: 3.75
+                                </div>
+                            </div>
+                            <div class="row text-center mt-3">
+                                <div class="col-6">
+                                    <strong>Pressure Level</strong><br>
+                                    <span class="text-danger">Maximum</span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Attack Mode</strong><br>
+                                    <span class="text-success">Desperate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Draw Scenarios -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">How This Match Could End in a Draw</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Most Likely Draw Scenarios</h6>
+                            <div class="draw-factors">
+                                <strong>2-2 Final Score (Most Likely)</strong>
+                                <p class="mb-1">Liverpool equalizes in final 20 minutes</p>
+                                <small class="text-muted">Probability: 65% of all draws</small>
+                            </div>
+                            <div class="draw-factors">
+                                <strong>3-3 High-Scoring Draw</strong>
+                                <p class="mb-1">Both teams score again in frantic finish</p>
+                                <small class="text-muted">Probability: 25% of all draws</small>
+                            </div>
+                            <div class="draw-factors">
+                                <strong>1-1 After Arsenal Collapse</strong>
+                                <p class="mb-1">Liverpool scores twice, Arsenal pulls one back</p>
+                                <small class="text-muted">Probability: 10% of all draws</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Current Match Dynamics</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Liverpool Pressure</td>
+                                    <td class="text-end"><span class="badge bg-danger">Intense</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Arsenal Defending</td>
+                                    <td class="text-end"><span class="badge bg-warning">Deep</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Match Tempo</td>
+                                    <td class="text-end"><span class="badge bg-success">High</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Goal Expectancy</td>
+                                    <td class="text-end"><span class="badge bg-primary">1-2 More</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Time Remaining</td>
+                                    <td class="text-end"><span class="badge bg-info">25+ mins</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historical Draw Data -->
+                <div class="stats-table p-4 mb-4">
+                    <h4 class="border-bottom pb-3 mb-4">Arsenal vs Liverpool Draw History</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Head-to-Head Draw Statistics</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Total Meetings:</td>
+                                    <td class="text-end">240</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Draws:</td>
+                                    <td class="text-end text-success">82 (34%)</td>
+                                </tr>
+                                <tr>
+                                    <td>At Emirates:</td>
+                                    <td class="text-end">28 draws in 60 games</td>
+                                </tr>
+                                <tr>
+                                    <td>When Arsenal leads 2-1:</td>
+                                    <td class="text-end">40% end in draws</td>
+                                </tr>
+                                <tr>
+                                    <td>This season draws:</td>
+                                    <td class="text-end">Arsenal 8, Liverpool 6</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Recent Draw Patterns</h6>
+                            <div class="mb-3">
+                                <strong>Last 10 Meetings:</strong>
+                                <div class="d-flex gap-1 mt-2">
+                                    <span class="badge bg-success">W</span>
+                                    <span class="badge bg-secondary">D</span>
+                                    <span class="badge bg-danger">L</span>
+                                    <span class="badge bg-secondary">D</span>
+                                    <span class="badge bg-success">W</span>
+                                    <span class="badge bg-secondary">D</span>
+                                    <span class="badge bg-danger">L</span>
+                                    <span class="badge bg-secondary">D</span>
+                                    <span class="badge bg-success">W</span>
+                                    <span class="badge bg-secondary">D</span>
+                                </div>
+                                <small class="text-muted">5 draws in last 10 meetings (50%)</small>
+                            </div>
+                            <div>
+                                <strong>Common Draw Scores:</strong>
+                                <ul class="list-unstyled mt-2">
+                                    <li>2-2: <span class="badge bg-primary">45%</span></li>
+                                    <li>1-1: <span class="badge bg-primary">30%</span></li>
+                                    <li>3-3: <span class="badge bg-primary">15%</span></li>
+                                    <li>0-0: <span class="badge bg-primary">10%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Draw Markets -->
+                <div class="stats-table p-4">
+                    <h4 class="border-bottom pb-3 mb-4">Live Draw Betting Markets</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Match Result</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Arsenal <span class="float-end">2.10</span></button>
+                                    <button class="btn btn-primary">Draw <span class="float-end">3.40</span></button>
+                                    <button class="btn btn-outline-primary">Liverpool <span class="float-end">3.75</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Exact Draw Scores</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">2-2 <span class="float-end">6.50</span></button>
+                                    <button class="btn btn-outline-primary">3-3 <span class="float-end">15.00</span></button>
+                                    <button class="btn btn-outline-primary">1-1 <span class="float-end">25.00</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Half Time/Full Time</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Arsenal/Draw <span class="float-end">8.50</span></button>
+                                    <button class="btn btn-outline-primary">Draw/Draw <span class="float-end">12.00</span></button>
+                                    <button class="btn btn-outline-primary">Liverpool/Draw <span class="float-end">45.00</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6>Draw & Goals</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Draw & Over 2.5 <span class="float-end">4.20</span></button>
+                                    <button class="btn btn-outline-primary">Draw & Under 4.5 <span class="float-end">2.80</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip & Draw Info -->
+            <div class="col-lg-4">
+                <!-- Quick Bet -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Quick Bet - Draw Result</h5>
+                    <div class="text-center mb-3">
+                        <div class="odds-highlight mb-3">
+                            3.40
+                        </div>
+                        <p class="text-muted">Potential return for $100 bet: <strong>$340</strong></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bet Amount ($)</label>
+                        <input type="number" class="form-control" placeholder="Enter amount" value="100">
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn bet-button">
+                            <i class="fas fa-handshake me-2"></i>
+                            Place Draw Bet - $340 Return
+                        </button>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <small>Live odds - Liverpool pushing hard for equalizer!</small>
+                    </div>
+                </div>
+
+                <!-- Draw Insights -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Draw Betting Insights</h5>
+                    <div class="mb-3">
+                        <h6><i class="fas fa-lightbulb text-warning me-2"></i>Why This Could End in a Draw</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Liverpool desperately need a point</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Arsenal happy to defend lead</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Both teams showing fatigue</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>High-pressure big match scenario</li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-fire me-2"></i>
+                        <strong>Live Tip:</strong> Liverpool have scored equalizers in 70% of games when trailing by 1 goal this season.
+                    </div>
+                </div>
+
+                <!-- Match Information -->
+                <div class="match-info-card p-4 mb-4">
+                    <h5 class="border-bottom pb-2 mb-3">Live Match Status</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Current Score:</span>
+                        <span class="fw-bold">Arsenal 2-1 Liverpool</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Match Time:</span>
+                        <span class="fw-bold">65:23</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Stadium:</span>
+                        <span class="fw-bold">Emirates Stadium</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Referee:</span>
+                        <span class="fw-bold">Anthony Taylor</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Next Goal Odds:</span>
+                        <span class="fw-bold">Liverpool 1.95</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Cards This Half:</span>
+                        <span class="fw-bold">3 Yellow</span>
+                    </div>
+                </div>
+
+                <!-- Draw Statistics -->
+                <div class="match-info-card p-4">
+                    <h5 class="border-bottom pb-2 mb-3">Draw Statistics</h5>
+                    <div class="mb-3">
+                        <h6>This Season's Draw Record</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Arsenal draws:</span>
+                            <span class="badge bg-secondary">8 in 25 games</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Liverpool draws:</span>
+                            <span class="badge bg-secondary">6 in 25 games</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Live Match Factors</h6>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Possession:</span>
+                            <span class="fw-bold">Arsenal 52% - 48% Liverpool</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Shots on Target:</span>
+                            <span class="fw-bold">5-5 (Even)</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Expected Goals:</span>
+                            <span class="fw-bold">2.1 - 2.0 (Very Close)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="soccer.html" class="text-white text-decoration-none">Soccer</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Bet Responsibly</h5>
+                    <p>Gambling can be addictive. Please play responsibly and within your means.</p>
+                    <div class="mt-3">
+                        <img src="/api/placeholder/50/30" alt="18+" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Responsible Gaming" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Premier League" class="me-2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OddCeltics - Celtic Sports Betting Platform</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --celtic-green: #00a86b;
+            --celtic-gold: #ffd700;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--celtic-green);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--celtic-gold) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--celtic-green);
+            border-color: var(--celtic-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: #008f5a;
+            border-color: #008f5a;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--celtic-gold);
+            border-color: var(--celtic-gold);
+            color: #111827;
+            font-weight: 600;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e6c200;
+            border-color: #e6c200;
+            color: #111827;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 168, 107, 0.8), rgba(0, 168, 107, 0.6)), url('/placeholder.svg?height=600&width=1200') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--celtic-green);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .match-card {
+            border-left: 4px solid var(--celtic-green);
+            margin-bottom: 1rem;
+        }
+        
+        .odds {
+            font-weight: bold;
+            color: var(--celtic-gold);
+        }
+        
+        .live-indicator {
+            background-color: var(--danger);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .bet-slip {
+            position: sticky;
+            top: 1rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .promotion-banner {
+            background: linear-gradient(to right, var(--celtic-green), var(--celtic-gold));
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .celtic-badge {
+            background-color: var(--celtic-green);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .list-group-item.active {
+            background-color: var(--celtic-green);
+            border-color: var(--celtic-green);
+        }
+        
+        .badge.bg-primary {
+            background-color: var(--celtic-green) !important;
+        }
+        
+        .btn-outline-primary {
+            color: var(--celtic-green);
+            border-color: var(--celtic-green);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--celtic-green);
+            border-color: var(--celtic-green);
+        }
+        
+        .text-primary {
+            color: var(--celtic-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-clover me-2"></i>
+                OddCeltics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sports">Celtic Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#live">Live Celtic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#heritage">Heritage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#promotions">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Log In</button>
+                    <button class="btn btn-accent">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Welcome to OddCeltics</h1>
+            <p class="lead mb-5">Experience the passion of Celtic sports betting with authentic odds and legendary bonuses</p>
+            <button class="btn btn-accent btn-lg px-5 me-3">Join the Clan</button>
+            <button class="btn btn-outline-light btn-lg px-5">Explore Heritage</button>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="container mt-5">
+        <div class="promotion-banner">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3>Celtic Welcome: 100% match up to €500</h3>
+                    <p class="mb-0">New clan members only. Min deposit €20. Celtic spirit required.</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-accent">Claim Celtic Bonus</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sports Navigation -->
+            <div class="col-lg-3 mb-4">
+                <div class="list-group">
+                    <div class="list-group-item bg-primary text-white">
+                        <i class="fas fa-trophy me-2"></i> Celtic Sports
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Gaelic Football <span class="badge bg-primary rounded-pill">18</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Hurling <span class="badge bg-primary rounded-pill">15</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Celtic FC <span class="badge bg-primary rounded-pill">12</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Rugby <span class="badge bg-primary rounded-pill">22</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Irish Boxing <span class="badge bg-primary rounded-pill">8</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Highland Games <span class="badge bg-primary rounded-pill">6</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        Camogie <span class="badge bg-primary rounded-pill">10</span>
+                    </a>
+                </div>
+
+                <div class="stats-card mt-4 p-3">
+                    <h5 class="border-bottom pb-2">Celtic Stats</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Most Popular:</span>
+                        <span class="fw-bold">Gaelic Football</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Active Clan:</span>
+                        <span class="fw-bold">2,847</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Live Matches:</span>
+                        <span class="fw-bold text-danger">8</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Celtic Pride:</span>
+                        <span class="fw-bold" style="color: var(--celtic-gold);">100%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matches -->
+            <div class="col-lg-6 mb-4">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Today's Celtic Matches</span>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-light active">All</button>
+                            <button class="btn btn-light">Live</button>
+                            <button class="btn btn-light">Upcoming</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <!-- Live Match -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span class="live-indicator me-2">LIVE</span>
+                                    <span class="text-muted">Gaelic Football - All-Ireland</span>
+                                </div>
+                                <small>52:15</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Kerry</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="fw-bold">1 - 12</div>
+                                    <small class="text-muted">vs</small>
+                                    <div class="fw-bold">0 - 14</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Dublin</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                    </button>
+                                        Kerry <span class="odds"><a href="celtics1.95.html" target="_blank" style="text-decoration: none; color: inherite"> 1.95</a></span></span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Dublin <span class="odds">1.85</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Celtic FC Match -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Scottish Premiership</span>
+                                <small>Today, 15:00</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Celtic FC</strong>
+                                    <div class="celtic-badge mt-1">C</div>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Rangers</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Home <span class="odds">1.65</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Draw <span class="odds">3.80</span>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Away <span class="odds">4.20</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hurling Match -->
+                        <div class="match-card p-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Hurling - All-Ireland Championship</span>
+                                <small>Today, 17:30</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Kilkenny</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Tipperary</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Kilkenny <span class="odds">2.10</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Tipperary <span class="odds">1.75</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rugby Match -->
+                        <div class="match-card p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Six Nations Championship</span>
+                                <small>Tomorrow, 14:30</small>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 text-center">
+                                    <strong>Ireland</strong>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="text-muted">vs</div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <strong>Scotland</strong>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Ireland <span class="odds">1.55</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary btn-sm w-100">
+                                        Scotland <span class="odds">2.45</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="text-decoration-none">View All Celtic Matches</a>
+                    </div>
+                </div>
+
+                <!-- Featured Events -->
+                <div class="card">
+                    <div class="card-header">Celtic Heritage Events</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 feature-card">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="All-Ireland Finals">
+                                    <div class="card-body">
+                                        <h5 class="card-title">All-Ireland Finals</h5>
+                                        <p class="card-text">Championship: September 15, 2025</p>
+                                        <button class="btn btn-sm btn-primary">View Markets</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 feature-card">
+                                    <img src="/placeholder.svg?height=200&width=400" class="card-img-top" alt="Celtic FC Champions League">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Celtic FC European Run</h5>
+                                        <p class="card-text">Champions League: March 2025</p>
+                                        <button class="btn btn-sm btn-primary">View Markets</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bet Slip -->
+            <div class="col-lg-3">
+                <div class="bet-slip p-3">
+                    <h5 class="border-bottom pb-2 mb-3">Celtic Bet Slip</h5>
+                    <div class="empty-slip text-center p-4">
+                        <i class="fas fa-clover fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your Celtic slip is empty</p>
+                        <p class="small text-muted">Click on odds to join the clan</p>
+                    </div>
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-secondary" disabled>Place Celtic Bet</button>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Celtic Links
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                My Celtic Bets
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Celtic Wallet
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Celtic Heritage
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                Clan Support
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose OddCeltics</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-clover fa-3x text-primary mb-3"></i>
+                            <h4>Celtic Heritage</h4>
+                            <p class="text-muted">Authentic Celtic sports betting with deep respect for tradition and heritage.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                            <h4>Clan Protection</h4>
+                            <p class="text-muted">Your clan's security is our priority with advanced protection measures.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4 feature-card">
+                        <div class="card-body">
+                            <i class="fas fa-heart fa-3x text-primary mb-3"></i>
+                            <h4>Celtic Spirit</h4>
+                            <p class="text-muted">Experience the passion and community spirit that defines Celtic culture.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">OddCeltics</h4>
+                    <p>Where Celtic heritage meets modern sports betting. Join our clan and experience the passion of authentic Celtic sports with competitive odds and legendary hospitality.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Celtic Sports</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Gaelic Football</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Hurling</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Celtic FC</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Rugby</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Highland Games</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Clan Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Clan</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Celtic FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Celtic Code</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Join the Clan</h5>
+                    <p>Subscribe to our Celtic newsletter for exclusive odds, heritage stories, and clan updates.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Join Clan</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method" class="me-2">
+                        <img src="/placeholder.svg?height=30&width=50" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 OddCeltics. All rights reserved. 18+ Gamble Responsibly. Céad míle fáilte.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions - Tess Betting</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .promotion-banner {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .promo-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            border: none;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .promo-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .promo-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .promo-badge-new {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .promo-badge-hot {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .promo-badge-limited {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .promo-category {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .category-sports {
+            background-color: rgba(30, 58, 138, 0.1);
+            color: var(--primary);
+        }
+        
+        .category-casino {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: var(--secondary);
+        }
+        
+        .category-special {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+        }
+        
+        .promo-expires {
+            font-size: 0.8rem;
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .filter-btn {
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2"><a href="login.html" style="text-decoration: none; color: inherit;">Log In</a></button>
+                    <button class="btn btn-accent"><a href="signup.html" style="text-decoration: none; color: inherit;">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Exclusive Promotions</h1>
+            <p class="lead mb-5">Discover our latest offers, bonuses, and special deals to maximize your betting experience</p>
+            <button class="btn btn-accent btn-lg px-5 me-3">Sign Up Now</button>
+            <button class="btn btn-outline-light btn-lg px-5">View All Offers</button>
+        </div>
+    </section>
+
+    <!-- Featured Promotion -->
+    <section class="container mt-5">
+        <div class="promotion-banner">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3>Welcome Bonus: 100% match up to $500</h3>
+                    <p class="mb-0">New customers only. Min deposit $20. Wagering requirements apply.</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-accent">Claim Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Filter -->
+    <section class="container mt-5">
+        <div class="d-flex justify-content-center flex-wrap mb-4">
+            <button class="btn filter-btn active">All Promotions</button>
+            <button class="btn filter-btn">Sports</button>
+            <button class="btn filter-btn">Casino</button>
+            <button class="btn filter-btn">New Customers</button>
+            <button class="btn filter-btn">Existing Customers</button>
+        </div>
+    </section>
+
+    <!-- Promotions Grid -->
+    <section class="container my-5">
+        <div class="row g-4">
+            <!-- Promotion 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Welcome Bonus">
+                    <span class="promo-badge promo-badge-new">NEW</span>
+                    <div class="card-body">
+                        <span class="promo-category category-sports">Sports</span>
+                        <h4 class="card-title">Welcome Bonus</h4>
+                        <p class="card-text">Get a 100% match on your first deposit up to $500. Perfect way to start your betting journey!</p>
+                        <p class="promo-expires">Expires: Never</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Claim Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Free Bet Club">
+                    <span class="promo-badge promo-badge-hot">HOT</span>
+                    <div class="card-body">
+                        <span class="promo-category category-sports">Sports</span>
+                        <h4 class="card-title">Free Bet Club</h4>
+                        <p class="card-text">Place 5 bets of $10 or more and get a $10 free bet every week. Join our club today!</p>
+                        <p class="promo-expires">Ongoing Promotion</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Casino Welcome Package">
+                    <div class="card-body">
+                        <span class="promo-category category-casino">Casino</span>
+                        <h4 class="card-title">Casino Welcome Package</h4>
+                        <p class="card-text">Get up to $1000 in bonuses plus 100 free spins when you make your first three deposits.</p>
+                        <p class="promo-expires">Expires: Never</p>
+                        <div class="d-grid">
+                            <button class="btn btn-secondary">Claim Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Acca Boost">
+                    <div class="card-body">
+                        <span class="promo-category category-sports">Sports</span>
+                        <h4 class="card-title">Acca Boost</h4>
+                        <p class="card-text">Get up to 50% extra on your accumulator bets. The more selections you add, the bigger the boost!</p>
+                        <p class="promo-expires">Ongoing Promotion</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Refer a Friend">
+                    <div class="card-body">
+                        <span class="promo-category category-special">Special</span>
+                        <h4 class="card-title">Refer a Friend</h4>
+                        <p class="card-text">Get $50 for each friend you refer who signs up and makes a deposit. Your friends get a bonus too!</p>
+                        <p class="promo-expires">Ongoing Promotion</p>
+                        <div class="d-grid">
+                            <button class="btn btn-accent">Refer Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Weekend Reload">
+                    <span class="promo-badge promo-badge-limited">LIMITED</span>
+                    <div class="card-body">
+                        <span class="promo-category category-casino">Casino</span>
+                        <h4 class="card-title">Weekend Reload</h4>
+                        <p class="card-text">Get a 50% reload bonus up to $100 every weekend. Make the most of your weekend gaming!</p>
+                        <p class="promo-expires">Expires: May 31, 2025</p>
+                        <div class="d-grid">
+                            <button class="btn btn-secondary">Claim Bonus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 7 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Early Payout">
+                    <div class="card-body">
+                        <span class="promo-category category-sports">Sports</span>
+                        <h4 class="card-title">Early Payout</h4>
+                        <p class="card-text">Get your bet paid out as a winner if your team goes 2 goals ahead in soccer matches.</p>
+                        <p class="promo-expires">Ongoing Promotion</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Bet Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 8 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Live Casino Cashback">
+                    <div class="card-body">
+                        <span class="promo-category category-casino">Casino</span>
+                        <h4 class="card-title">Live Casino Cashback</h4>
+                        <p class="card-text">Get 10% cashback up to $100 on your net losses in our Live Casino every Tuesday.</p>
+                        <p class="promo-expires">Every Tuesday</p>
+                        <div class="d-grid">
+                            <button class="btn btn-secondary">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotion 9 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card promo-card">
+                    <img src="/api/placeholder/400/200" class="card-img-top" alt="Mobile App Bonus">
+                    <span class="promo-badge promo-badge-new">NEW</span>
+                    <div class="card-body">
+                        <span class="promo-category category-special">Special</span>
+                        <h4 class="card-title">Mobile App Bonus</h4>
+                        <p class="card-text">Download our mobile app and get a $20 free bet. Bet anytime, anywhere with our mobile platform.</p>
+                        <p class="promo-expires">Expires: June 30, 2025</p>
+                        <div class="d-grid">
+                            <button class="btn btn-accent">Download App</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-5">
+            <button class="btn btn-outline-primary px-5">Load More Promotions</button>
+        </div>
+    </section>
+
+    <!-- Terms and Conditions -->
+    <section class="container my-5">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">General Promotion Terms & Conditions</h4>
+            </div>
+            <div class="card-body">
+                <p>All promotions are subject to the following general terms and conditions:</p>
+                <ul>
+                    <li>You must be 18 years or older to participate in any promotion.</li>
+                    <li>Tess Betting reserves the right to amend, cancel, reclaim or refuse any promotion at its own discretion.</li>
+                    <li>Specific promotion terms apply to each offer. Please read the full terms before participating.</li>
+                    <li>Unless stated otherwise, bonuses have a wagering requirement of 10x the bonus amount.</li>
+                    <li>Only one promotion can be claimed per person, household, IP address, email address, or payment method.</li>
+                    <li>Employees of Tess Betting, their family members, or anyone else connected to the creation or administration of the promotion are not eligible.</li>
+                    <li>All promotions are intended for recreational players only.</li>
+                </ul>
+                <p class="mb-0">For full terms and conditions, please <a href="#" class="text-decoration-none">click here</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion" id="promoFAQ">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        How do I claim a promotion?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#promoFAQ">
+                    <div class="accordion-body">
+                        To claim a promotion, simply click on the "Claim Offer" or similar button on the promotion card. You may need to be logged in to your account. Some promotions are applied automatically, while others may require a promo code or opt-in.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        What is a wagering requirement?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#promoFAQ">
+                    <div class="accordion-body">
+                        A wagering requirement is the number of times you need to bet your bonus amount before you can withdraw any winnings. For example, if you receive a $50 bonus with a 10x wagering requirement, you'll need to place bets totaling $500 before you can withdraw any winnings from the bonus.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Can I claim multiple promotions at once?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#promoFAQ">
+                    <div class="accordion-body">
+                        Generally, you can only have one active bonus at a time. You'll need to complete the wagering requirements of your current bonus before claiming another one. Some ongoing promotions like the Free Bet Club can run alongside other bonuses.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        What happens if I don't meet the wagering requirements?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#promoFAQ">
+                    <div class="accordion-body">
+                        If you don't meet the wagering requirements within the specified timeframe, the bonus and any winnings derived from it will be forfeited. Always check the time limit for completing wagering requirements in the specific promotion terms.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        How often are new promotions added?
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#promoFAQ">
+                    <div class="accordion-body">
+                        We regularly update our promotions page with new offers. We typically add seasonal promotions for major sporting events and holidays. Make sure to check back frequently or subscribe to our newsletter to stay updated on the latest offers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">Stay Updated on Promotions</h2>
+                    <p class="mb-4">Subscribe to our newsletter to receive the latest promotions and exclusive offers directly to your inbox.</p>
+                    <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <p class="text-muted small">We respect your privacy and will never share your information with third parties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="promotions.html" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button">Subscribe</button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

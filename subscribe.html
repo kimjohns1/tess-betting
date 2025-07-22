@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - Tess Betting Newsletter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e89a0c;
+            border-color: #e89a0c;
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .subscription-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .subscription-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subscription-card.featured {
+            border-color: var(--accent);
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .subscription-form {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        
+        .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.25);
+        }
+        
+        .benefit-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .stats-highlight {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .frequency-selector {
+            background-color: #f8f9fa;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .frequency-selector:hover {
+            border-color: var(--primary);
+        }
+        
+        .frequency-selector.active {
+            border-color: var(--primary);
+            background-color: rgba(30, 58, 138, 0.1);
+        }
+        
+        .success-message {
+            background-color: var(--success);
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-dice me-2"></i>
+                Tess Betting
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sports.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">
+                        <a href="login.html" target="_blank" style="text-decoration: none; color: inherit">Log In</a>
+                    </button>
+                    <button class="btn btn-accent">
+                        <a href="signup.html" target="_blank" style="text-decoration: none; color: inherit">Sign Up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Stay Ahead of the Game</h1>
+            <p class="lead mb-5">Subscribe to our newsletter and get exclusive betting tips, odds updates, and special promotions delivered to your inbox</p>
+            <div class="stats-highlight d-inline-block">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <h3 class="fw-bold">50,000+</h3>
+                        <p class="mb-0">Subscribers</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="fw-bold">95%</h3>
+                        <p class="mb-0">Win Rate Tips</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="fw-bold">Daily</h3>
+                        <p class="mb-0">Updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Subscription Form -->
+            <div class="col-lg-8">
+                <div class="subscription-form">
+                    <h3 class="mb-4"><i class="fas fa-envelope me-2"></i>Subscribe to Our Newsletter</h3>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Thank you for subscribing! You'll receive a confirmation email shortly.
+                    </div>
+                    
+                    <form id="subscriptionForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Subscription Frequency</label>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <div class="frequency-selector active" onclick="selectFrequency(this, 'daily')">
+                                        <div class="text-center">
+                                            <i class="fas fa-calendar-day fa-2x text-primary mb-2"></i>
+                                            <h6>Daily</h6>
+                                            <small class="text-muted">Get daily tips and updates</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="frequency-selector" onclick="selectFrequency(this, 'weekly')">
+                                        <div class="text-center">
+                                            <i class="fas fa-calendar-week fa-2x text-primary mb-2"></i>
+                                            <h6>Weekly</h6>
+                                            <small class="text-muted">Weekly digest and highlights</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="frequency-selector" onclick="selectFrequency(this, 'monthly')">
+                                        <div class="text-center">
+                                            <i class="fas fa-calendar-alt fa-2x text-primary mb-2"></i>
+                                            <h6>Monthly</h6>
+                                            <small class="text-muted">Monthly summary and trends</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Interests (Select all that apply)</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="football" value="football">
+                                        <label class="form-check-label" for="football">Football</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="basketball" value="basketball">
+                                        <label class="form-check-label" for="basketball">Basketball</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="tennis" value="tennis">
+                                        <label class="form-check-label" for="tennis">Tennis</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="soccer" value="soccer">
+                                        <label class="form-check-label" for="soccer">Soccer</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="baseball" value="baseball">
+                                        <label class="form-check-label" for="baseball">Baseball</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="hockey" value="hockey">
+                                        <label class="form-check-label" for="hockey">Hockey</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="promotions" value="promotions">
+                                        <label class="form-check-label" for="promotions">Exclusive Promotions</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="tips" value="tips">
+                                        <label class="form-check-label" for="tips">Betting Tips</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-accent btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Subscribe Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Benefits Section -->
+                <div class="mt-5">
+                    <h4 class="mb-4">What You'll Get</h4>
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-chart-line fa-2x text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-1">Expert Betting Tips</h6>
+                                <p class="mb-0 text-muted">Get insider tips from our team of professional analysts with proven track records.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-bolt fa-2x text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-1">Live Odds Updates</h6>
+                                <p class="mb-0 text-muted">Be the first to know about odds changes and market movements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-gift fa-2x text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-1">Exclusive Promotions</h6>
+                                <p class="mb-0 text-muted">Access subscriber-only bonuses and special offers before anyone else.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-trophy fa-2x text-primary me-3"></i>
+                            <div>
+                                <h6 class="mb-1">Match Previews & Analysis</h6>
+                                <p class="mb-0 text-muted">In-depth analysis of upcoming matches and tournaments.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Subscription Tiers -->
+                <div class="subscription-card mb-4">
+                    <div class="card-header text-center">
+                        <h5 class="mb-0">Free Newsletter</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <span class="h2 fw-bold">Free</span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Weekly betting tips</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Match previews</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Promotional offers</li>
+                            <li class="mb-2"><i class="fas fa-times text-muted me-2"></i>Premium analysis</li>
+                            <li class="mb-2"><i class="fas fa-times text-muted me-2"></i>Live odds alerts</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subscription-card featured mb-4">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="card-header text-center">
+                        <h5 class="mb-0">Premium Newsletter</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <span class="h2 fw-bold">$9.99</span>
+                            <small class="text-muted">/month</small>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Daily betting tips</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Premium analysis</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Live odds alerts</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>VIP promotions</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Expert predictions</li>
+                        </ul>
+                        <button class="btn btn-primary w-100">Upgrade to Premium</button>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="testimonial-card mb-4">
+                    <div class="mb-3">
+                        <i class="fas fa-quote-left fa-2x text-primary"></i>
+                    </div>
+                    <p class="mb-3">"The daily tips have increased my winning rate by 40%. Best investment I've made!"</p>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="/api/placeholder/50/50" alt="User" class="rounded-circle me-3">
+                        <div>
+                            <h6 class="mb-0">Mike Johnson</h6>
+                            <small class="text-muted">Premium Subscriber</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="mb-3">
+                        <i class="fas fa-quote-left fa-2x text-primary"></i>
+                    </div>
+                    <p class="mb-3">"Great insights and analysis. The match previews are incredibly detailed and helpful."</p>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="/api/placeholder/50/50" alt="User" class="rounded-circle me-3">
+                        <div>
+                            <h6 class="mb-0">Sarah Davis</h6>
+                            <small class="text-muted">Free Subscriber</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4">Tess Betting</h4>
+                    <p>The ultimate destination for sports betting enthusiasts. Offering competitive odds, a wide range of markets, and exceptional user experience.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="sports.html" class="text-white text-decoration-none">Sports</a></li>
+                        <li class="mb-2"><a href="livebetting.html" class="text-white text-decoration-none">Live Betting</a></li>
+                        <li class="mb-2"><a href="casino.html" class="text-white text-decoration-none">Casino</a></li>
+                        <li class="mb-2"><a href="promotions.html" class="text-white text-decoration-none">Promotions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="helpcenter.html" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Responsible Gaming</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-accent" type="button"><a href="subscribe.html" target="_blank" style="text-decoration: none; color: inherite">subscribe</a></button>
+                    </div>
+                    <div class="mt-4">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method" class="me-2">
+                        <img src="/api/placeholder/50/30" alt="Payment Method">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2025 Tess Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function selectFrequency(element, frequency) {
+            // Remove active class from all frequency selectors
+            document.querySelectorAll('.frequency-selector').forEach(selector => {
+                selector.classList.remove('active');
+            });
+            
+            // Add active class to selected element
+            element.classList.add('active');
+            
+            console.log('Selected frequency:', frequency);
+        }
+        
+        document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                frequency: document.querySelector('.frequency-selector.active').onclick.toString().match(/selectFrequency$$this, '(.+)'$$/)[1],
+                interests: Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value)
+            };
+            
+            console.log('Subscription data:', formData);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Reset frequency selector to daily
+            document.querySelectorAll('.frequency-selector').forEach(selector => {
+                selector.classList.remove('active');
+            });
+            document.querySelector('.frequency-selector').classList.add('active');
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
